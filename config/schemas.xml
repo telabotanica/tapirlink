@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<schemas>
+  <schema alias="DarwinCore terms (2011-10-26)">
+    <namespace>http://rs.tdwg.org/dwc/terms/</namespace>
+    <location>http://www.tela-botanica.org/tapirlink/depot/ref/dwc_terms_2011_10_26.xml</location>
+    <handler>CnsSchemaHandler_v2</handler>
+  </schema>
+ <schema alias="DarwinCore 1.4">
+    <namespace>http://rs.tdwg.org/dwc/dwcore/</namespace>
+    <location>http://rs.tdwg.org/tapir/cns/dwc_1_4.xml</location>
+    <handler>CnsSchemaHandler_v2</handler>
+  </schema>
+  <schema alias="DarwinCore 1.4 curatorial extension">
+    <namespace>http://rs.tdwg.org/dwc/curatorial/</namespace>
+    <location>http://rs.tdwg.org/tapir/cns/dwcur_1_4.xml</location>
+    <handler>CnsSchemaHandler_v2</handler>
+  </schema>
+ <schema alias="DarwinCore 1.4 geospatial extension">
+    <namespace>http://rs.tdwg.org/dwc/geospatial/</namespace>
+    <location>http://rs.tdwg.org/tapir/cns/dwgeo_1_4.xml</location>
+    <handler>CnsSchemaHandler_v2</handler>
+  </schema>
+  <schema alias="ABCD 2.06">
+     <namespace>http://www.tdwg.org/schemas/abcd/2.06</namespace>
+     <location>http://rs.tdwg.org/tapir/cns/abcd_2_06.xml</location>
+     <handler>CnsSchemaHandler_v2</handler>
+  </schema>
+</schemas>

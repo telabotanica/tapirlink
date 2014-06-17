@@ -1,0 +1,59 @@
+body
+{
+  margin-top: 5px;
+  margin-left: 20px;
+  margin-right: 400px;
+}
+
+a
+{
+  font-size: 12px;
+  font-weight: normal;
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+td,th
+{ 
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 13px;
+  color: black;
+}
+
+.Title
+{
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+.Section
+{
+  color: #000000;
+  font-size: 13px;
+  font-weight: normal;
+  font-style: italic;
+  text-decoration: underline;
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+.Label
+{
+  font-size: 12px;
+  font-weight: bold;
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+.RegularText
+{
+  font-size: 12px;
+  font-weight: normal;
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+.SubLabel
+{
+  font-size: 11px;
+  font-weight: bold;
+  font-style: italic;
+  font-family: Arial,Helvetica,sans-serif;
+}

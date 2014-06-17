@@ -1,0 +1,9 @@
+# Modifier le chemin de AuthUserFile pour qu'il corresponde à votre serveur
+# Change the path depending on your server and un-comment all the lines after here
+#AuthUserFile /my/path/to/tapirlink/admin/.htpasswd
+#AuthGroupFile /dev/null
+#AuthName "Admin of TapirLink"
+#AuthType Basic
+#<Limit GET POST>
+#require valid-user
+#</Limit>

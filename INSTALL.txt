@@ -1,0 +1,161 @@
+REQUIREMENTS
+============
+
+Web Server, PHP (>= 4.2.3), a relational database with the data you 
+want to share (may not be in the same machine but needs to be 
+accessible) and the corresponding PHP database module to connect to 
+your database.
+
+It is also recommended to enable the PHP "mbstring" module.
+
+INSTRUCTIONS
+============
+
+1.  Install a Web Server if you don't have one.
+2.  Install PHP and configure your Web Server to use it.
+3.  Install and configure the corresponding PHP module to connect to your 
+    relational database.
+4.  Extract the TapirLink tarball/zip file, or check it out directly from
+    the Subversion repository located at:
+    https://digir.svn.sourceforge.net/svnroot/digir/tapirlink/trunk
+5.  All directories must be readable by the Web Server user.
+    Note: on Windows you probably don't need to worry about this.
+6.  The Web Server user will need write access to the following 
+    directories: config, log, cache and statistics.
+    Note: it will need write access to all directories and files if
+    you wish to enable automatic updates.
+    Note: on Windows you probably don't need to worry about permissions.
+7.  Configure your Web Server to expose the directories "admin" 
+    and "www". IMPORTANT: the "admin" directory should be password 
+    protected and ideally behind a secure connection!
+    Note: This step is usually done by setting up two virtual
+    hosts, where each alias point to the corresponding directory. In
+    the examples below "tapirlink-admin" can be seen as a virtual host
+    alias to the "admin" directory, and "tapirlink" as a virtual host
+    alias to the "www" directory.
+8.  Check your installation by running:
+    http://your.host/tapirlink-admin/check.php
+    (change the previous address according to your local configuration).
+9.  Configure at least one resource using the web configuration 
+    interface available at: 
+    http://your.host/tapirlink-admin/configurator.php
+    (change the previous address according to your local configuration).
+10. Run some tests using the simple client interface:
+    http://your.host/tapirlink/tapir_client.php
+
+
+AUTOMATIC UPDATES
+=================
+
+It is possible to configure TapirLink to enable automatic updates, 
+however this will require file system write permissions in all 
+TapirLink directories and files to the user running the Web Server.
+
+Updates will only happen when the revision number in the following
+official address is updated after a new stable release is made:
+
+http://rs.tdwg.org/tapir/software/tlink.xml
+
+These are the basic steps and requirements to enable automatic updates:
+
+(note: there are detailed instructions for Windows users further below)
+
+- You must have Subversion (command-line) installed and available to 
+  the Web Server. This is the Subversion official website:
+
+  http://subversion.tigris.org/
+
+- TapirLink must be installed from Subversion (the repository address is
+  mentioned in the installation instructions above) and you must accept
+  the SSL certificate permanently when checking out your local TapirLink
+  copy.
+
+- All TapirLink files and directories must be writable by the Web Server
+  user.
+
+- You need to enable shell execution for PHP. Note that this will not be 
+  enabled by default if you are running PHP in Safe Mode.
+
+- TapirLink PHP scripts must be able to make external calls, at least to the 
+  TAPIR resources domain hosted by TDWG: http://rs.tdwg.org
+
+- You must choose a server that will trigger the updates and install a 
+  command-line program that can make HTTP calls, such as CURL. This is the 
+  CURL official website:
+
+  http://curl.haxx.se/
+
+- Finally you need to set up a task that server that will periodically call 
+  the following script:
+
+  http://your.host/tapirlink-admin/check_update.php
+
+  GNU/Linux users will likely use "cron", while Windows users will likely use
+  the Task Scheduler. Note that this can be setup in the same machine that you
+  installed TapirLink, or in another machine of your preference. If you are
+  managing multiple TapirLink installations, you probably want to choose one 
+  server to set up the task of calling all check_update.php scripts in each
+  installation.
+
+
+NOTE: This procedure will stop working in case sourceforge changes the SSL
+certificate that is used to interact with the Subversion repository. In this 
+case, it will be necessary to manually update the TapirLink installation 
+(through "svn update") to accept the new SSL certificate permanently.
+
+
+Practical instructions for Windows users:
+
+1- Install Subversion command-line:
+
+http://subversion.tigris.org/files/documents/15/36797/svn-1.4.3-setup.exe
+
+(when installing, you don't need any of the optional modules)
+
+2- Install TapirLink from Subverion:
+
+ 2.1- Create a "vhosts" directory under C:
+ 2.2- Open a shell window (Start menu/Run/cmd.exe)
+ 2.3- Go to that directory: cd C:\vhosts
+ 2.4- Check out TapirLink: svn co https://digir.svn.sourceforge.net/svnroot/digir/tapirlink/trunk tapirlink
+ (remember to type "p" to accept the SSL certificate permanently)
+ 2.5- Follow the installation instructions in the beginning of this document.
+
+2- Restart Apache, or better, the whole machine, otherwise the Subversion 
+exe (svn.exe) will not be in the path.
+
+3- Choose a server that will be used to trigger the update in all your
+TapirLink installations and install a command line program that can make 
+HTTP calls. Suggestion: CURL. You can download it from here:
+
+http://curl.haxx.se/download.html
+
+Note: You don't need SSL support unless the TapirLink admin pages are 
+under HTTPS. If you choose SSL support you'll likely need to have 
+special external libraries in you computer because they are not
+distributed in some CURL packages.
+
+4- To test, run CURL in command line calling the check_update script in the
+TapirLink instance that you want to update:
+
+curl http://your.host/tapirlink/admin/check_update.php
+
+Note that you can add parameters to the curl call if the admin pages are
+password protected with HTTP basic authentication.
+Use curl --help for more information.
+
+You should see in the output:
+
+Local revision number is: xxx
+Recommended revision number is: xxx
+Action: No need to update
+
+To test a real update, you should go to the TapirLink installation directory 
+and manually update your local copy to a revision number less than the current 
+revision number but greater than 662 (when this feature was implemented). Then 
+run CURL again to see the result.
+
+5- Create a .bat file with all necessary CURL calls and then add a new entry 
+in your Task Scheduler to periodically call the .bat file (say, weekly).
+
+-----------------------

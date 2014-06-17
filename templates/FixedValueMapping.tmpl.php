@@ -1,0 +1,1 @@
+<input type="text" name="<?php print($this->GetInputName()); ?>" value="<?php print($this->GetValue()); ?>" size="30"/>

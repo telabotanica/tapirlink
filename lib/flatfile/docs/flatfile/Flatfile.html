@@ -1,0 +1,518 @@
+<html>
+<head>
+<title>Docs For Class Flatfile</title>
+<link rel="stylesheet" type="text/css" href="../media/style.css">
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">flatfile</td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+  		  [ <a href="../classtrees_flatfile.html" class="menu">class tree: flatfile</a> ]
+		  [ <a href="../elementindex_flatfile.html" class="menu">index: flatfile</a> ]
+		  [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+      <b>Packages:</b><br />
+              <a href="../li_flatfile.html">flatfile</a><br />
+            <br /><br />
+		<b>Tutorials/Manuals:</b><br />
+					<strong>Package-level:</strong>
+							<ul>
+	<li type="square"><a href="../flatfile/tutorial_flatfile.pkg.html">Flatfile Tutorial</a>
+</ul>
+
+									                        <b>Files:</b><br />
+      	  <div class="package">
+			<a href="../flatfile/_flatfile_flatfile_php.html">		flatfile.php
+		</a><br>
+	  </div><br />
+      
+            <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../flatfile/AndWhereClause.html">AndWhereClause</a><br />
+	    		<a href="../flatfile/CompositeWhereClause.html">CompositeWhereClause</a><br />
+	    		<a href="../flatfile/Flatfile.html">Flatfile</a><br />
+	    		<a href="../flatfile/LikeWhereClause.html">LikeWhereClause</a><br />
+	    		<a href="../flatfile/ListWhereClause.html">ListWhereClause</a><br />
+	    		<a href="../flatfile/NotWhere.html">NotWhere</a><br />
+	    		<a href="../flatfile/OrderBy.html">OrderBy</a><br />
+	    		<a href="../flatfile/OrWhereClause.html">OrWhereClause</a><br />
+	    		<a href="../flatfile/SimpleWhereClause.html">SimpleWhereClause</a><br />
+	    		<a href="../flatfile/WhereClause.html">WhereClause</a><br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<h1>Class: Flatfile</h1>
+Source Location: /flatfile.php<br /><br />
+
+
+<table width="100%" border="0">
+<tr><td valign="top">
+
+<h3><a href="#class_details">Class Overview</a></h3>
+<pre></pre><br />
+<div class="description">Provides simple but powerful flatfile database storage and retrieval</div><br /><br />
+
+
+
+
+
+
+
+</td>
+
+<td valign="top">
+<h3><a href="#class_vars">Variables</a></h3>
+<ul>
+    <li><a href="../flatfile/Flatfile.html#var$datadir">$datadir</a></li>
+  </ul>
+</td>
+
+
+<td valign="top">
+<h3><a href="#class_methods">Methods</a></h3>
+<ul>
+    <li><a href="../flatfile/Flatfile.html#methoddeleteAll">deleteAll</a></li>
+    <li><a href="../flatfile/Flatfile.html#methoddeleteWhere">deleteWhere</a></li>
+    <li><a href="../flatfile/Flatfile.html#methodinsert">insert</a></li>
+    <li><a href="../flatfile/Flatfile.html#methodinsertWithAutoId">insertWithAutoId</a></li>
+    <li><a href="../flatfile/Flatfile.html#methodselectAll">selectAll</a></li>
+    <li><a href="../flatfile/Flatfile.html#methodselectUnique">selectUnique</a></li>
+    <li><a href="../flatfile/Flatfile.html#methodselectWhere">selectWhere</a></li>
+    <li><a href="../flatfile/Flatfile.html#methodupdateRowById">updateRowById</a></li>
+    <li><a href="../flatfile/Flatfile.html#methodupdateSetWhere">updateSetWhere</a></li>
+  </ul>
+</td>
+
+</tr></table>
+<hr />
+
+<table width="100%" border="0"><tr>
+
+
+
+
+
+
+</tr></table>
+<hr />
+
+<a name="class_details"></a>
+<h3>Class Details</h3>
+<div class="tags">
+[line 52]<br />
+Provides simple but powerful flatfile database storage and retrieval<br /><br /><p>Includes equivalents to SELECT * FROM table WHERE..., DELETE WHERE ...  UPDATE and more.  All files are stored in the <a href="../flatfile/Flatfile.html#var$datadir">$datadir</a> directory,  and table names are just filenames in that directory.  Subdirectories  can be used just by specifying a table name that includes the directory name.</p><br /></div><br /><br />
+<div class="top">[ <a href="#top">Top</a> ]</div><br />
+
+<hr />
+<a name="class_vars"></a>
+<h3>Class Variables</h3>
+<div class="tags">
+	<a name="var$datadir"></a>
+	<p></p>
+	<h4>$datadir = <span class="value"></span></h4>
+	<p>[line 59]</p>
+  The directory to store files in.<br /><br />
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>string</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+</div><br />
+
+<hr />
+<a name="class_methods"></a>
+<h3>Class Methods</h3>
+<div class="tags">
+  <hr />
+	<a name="methoddeleteAll"></a>
+	<h3>method deleteAll <span class="smalllinenumber">[line 283]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void deleteAll(
+string
+$tablename)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Delete all rows in a table<br /><br /><br /><br />
+
+
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$tablename</b>&nbsp;&nbsp;</td>
+        <td>The table to alter</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methoddeleteWhere"></a>
+	<h3>method deleteWhere <span class="smalllinenumber">[line 265]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void deleteWhere(
+string
+$tablename, mixed
+$whereClause, object
+$whereClause.)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Deletes all rows in a table that match specified criteria<br /><br /><br /><br />
+
+
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$tablename</b>&nbsp;&nbsp;</td>
+        <td>The table to alter</td>
+      </tr>
+          <tr>
+        <td class="type">object&nbsp;&nbsp;</td>
+        <td><b>$whereClause.</b>&nbsp;&nbsp;</td>
+        <td><a href="../flatfile/WhereClause.html">WhereClause</a> object that will select  rows to be deleted.  All rows are deleted if $whereClause === NULL</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodinsert"></a>
+	<h3>method insert <span class="smalllinenumber">[line 210]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void insert(
+string
+$tablename, array
+$newRow)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Inserts a row in a table<br /><br /><br /><br />
+
+
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$tablename</b>&nbsp;&nbsp;</td>
+        <td>The table to insert data into</td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$newRow</b>&nbsp;&nbsp;</td>
+        <td>The new row to add to the table</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodinsertWithAutoId"></a>
+	<h3>method insertWithAutoId <span class="smalllinenumber">[line 187]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>int insertWithAutoId(
+string
+$tablename, int
+$idField, array
+$newRow)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Inserts a row with an automatically generated ID<br /><br /><p>The autogenerated ID will be the highest ID in the column so far plus one. The  supplied row should include all fields required for the table, and the  ID field it contains will just be ignored</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The newly assigned ID</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$tablename</b>&nbsp;&nbsp;</td>
+        <td>The table to insert data into</td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$idField</b>&nbsp;&nbsp;</td>
+        <td>The index of the field which is the ID field</td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$newRow</b>&nbsp;&nbsp;</td>
+        <td>The new row to add to the table</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodselectAll"></a>
+	<h3>method selectAll <span class="smalllinenumber">[line 66]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>array selectAll(
+string
+$tablename)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Get all rows from a table<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The table as an array of rows, where each row is an array of columns</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$tablename</b>&nbsp;&nbsp;</td>
+        <td>The table to get rows from</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodselectUnique"></a>
+	<h3>method selectUnique <span class="smalllinenumber">[line 128]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>array selectUnique(
+string
+$tablename, string
+$idField, string
+$id)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Select a row using a unique ID<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The row of the table as an array</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$tablename</b>&nbsp;&nbsp;</td>
+        <td>The table to get data from</td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$idField</b>&nbsp;&nbsp;</td>
+        <td>The index of the field containing the ID</td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$id</b>&nbsp;&nbsp;</td>
+        <td>The ID to search for</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodselectWhere"></a>
+	<h3>method selectWhere <span class="smalllinenumber">[line 92]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>array selectWhere(
+string
+$tablename, object
+$whereClause, [mixed
+$limit = -1], [mixed
+$orderBy = NULL])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Selects rows from a table that match the specified criteria<br /><br /><p>This simulates the following SQL query:  <pre>   SELECT LIMIT $limit * FROM  $tablename
+   WHERE $whereclause
+   ORDER BY $orderBy [ASC | DESC] [, $orderBy2 ...]</pre></p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The matching data, as an array of rows, where each row is an array of columns</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$tablename</b>&nbsp;&nbsp;</td>
+        <td>The table (file) to get the data from</td>
+      </tr>
+          <tr>
+        <td class="type">object&nbsp;&nbsp;</td>
+        <td><b>$whereClause</b>&nbsp;&nbsp;</td>
+        <td>Either a <a href="../flatfile/WhereClause.html">WhereClause</a> object to do selection of rows, or NULL to select all</td>
+      </tr>
+          <tr>
+        <td class="type">mixed&nbsp;&nbsp;</td>
+        <td><b>$limit</b>&nbsp;&nbsp;</td>
+        <td>Specifies limits for the rows returned: <ul><li>use -1 or omitted to return all rows</li><li>use an integer n to return the first n rows</li><li>use a two item array ($startrow, $endrow) to return rows $startrow to $endrow - 1 (zero indexed)</li><li>use a two item array ($startrow, -1) to return rows $startrow to the end (zero indexed)</li></ul></td>
+      </tr>
+          <tr>
+        <td class="type">mixed&nbsp;&nbsp;</td>
+        <td><b>$orderBy</b>&nbsp;&nbsp;</td>
+        <td>Either an <a href="../flatfile/OrderBy.html">OrderBy</a> object or an array of them, defining the sorting that should be applied (if an array, then the first object in the array is the first key to sort on etc).  Use NULL for no sorting.</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodupdateRowById"></a>
+	<h3>method updateRowById <span class="smalllinenumber">[line 225]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void updateRowById(
+string
+$tablename, int
+$idField, array
+$updatedRow)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Updates an existing row using a unique ID<br /><br /><br /><br />
+
+
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$tablename</b>&nbsp;&nbsp;</td>
+        <td>The table to update</td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$idField</b>&nbsp;&nbsp;</td>
+        <td>The index of the field which is the ID field</td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$updatedRow</b>&nbsp;&nbsp;</td>
+        <td>The updated row to add to the table</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodupdateSetWhere"></a>
+	<h3>method updateSetWhere <span class="smalllinenumber">[line 242]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void updateSetWhere(
+string
+$tablename, array
+$newFields, <a href="../flatfile/WhereClause.html">WhereClause</a>
+$whereClause)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Updates fields in a table for rows that match the provided criteria<br /><br /><p>$newFields can be a complete row or it can be a sparsely populated  hashtable of values (where the keys are integers which are the column  indexes to update)</p><br /><br /><br />
+
+
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$tablename</b>&nbsp;&nbsp;</td>
+        <td>The table to update</td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$newFields</b>&nbsp;&nbsp;</td>
+        <td>A hashtable (with integer keys) of fields to update</td>
+      </tr>
+          <tr>
+        <td class="type"><a href="../flatfile/WhereClause.html">WhereClause</a>&nbsp;&nbsp;</td>
+        <td><b>$whereClause</b>&nbsp;&nbsp;</td>
+        <td>The criteria or NULL to update all rows</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+</div><br />
+
+
+        <div class="credit">
+		    <hr />
+		    Documentation generated on Thu, 22 Dec 2005 12:59:50 +0000 by <a href="http://www.phpdoc.org">phpDocumentor 1.3.0RC3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

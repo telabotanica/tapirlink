@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<request xmlns="http://rs.tdwg.org/tapir/1.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://rs.tdwg.org/tapir/1.0 http://rs.tdwg.org/tapir/1.0/schema/tapir.xsd">
+	<header>
+		<destination resource="cel">http://www.tela-botanica.org/tapirlink/tapir.php/cel</destination>
+		<type>tapir</type>
+	</header>
+	<search count="true" start="0" limit="200">
+		<externalOutputModel location="http://rs.tdwg.org/tapir/cs/dwc/terms/2009-09-23/model/dwc_simple.xml" />
+		<filter>
+			<and>  
+				<greaterThanOrEquals>
+					<concept id="http://rs.tdwg.org/dwc/dwcore/ScientificName"/>
+					<literal value="Aa"/>
+				</greaterThanOrEquals>
+				<lessThanOrEquals>
+					<concept id="http://rs.tdwg.org/dwc/dwcore/ScientificName"/>
+					<literal value="Az"/>
+				</lessThanOrEquals>
+			</and>
+		</filter>
+		<records limit="200" start="0">
+			<structure schemaLocation="http://digir.sourceforge.net/schema/conceptual/darwin/full/2003/1.0/darwin2full.xsd"/>
+		</records>
+		<count>true</count>
+	</search>
+</request>

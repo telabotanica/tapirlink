@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>TAPIR LSID Authority (PHP version)</title>
+    </head>
+    <body>
+        <h1>A Simple LSID Authority</h1>
+        <p><a href="mailto:richardsk@landcareresearch.co.nz">Kevin Richards</a>, March 2007 - Version 0.1</p>
+        <h2>Introduction</h2>
+        <p>This folder contains the files required for a very simple LSID authority to resolve LSIDs that are contained
+           within the data of a TapirLink provider.</p>
+        <p>The LSID authority works by specifying part of a TAPIR URL based on a parameterised query template. The query template must contain at least one filter condition bound to an &quot;lsid&quot; parameter. LSID clients will then call the specified TAPIR URL appending the &quot;lsid&quot; parameter. This call will return metadata for the respective LSID. The example given by default uses a query template that returns an RDF representation of DarwinCore using a filter where the &quot;lsid&quot; parameter must match the value of the GlobalUniqueIdentifier DarwinCore concept.</p>
+        <p>The LSID authority was created by taking the HTTP GET bindings of the LSID specification and interpreting
+            them from the point of view of someone who is comfortable with implementing web sites
+            and applications in technologies like ASP, JSP, Python and PHP. SOAP bindings and complex web service stuff are ignored. 
+            It is assumed that we are using PHP and have
+            a PHP enabled web server, however porting the code to another technology would be easy enough.</p>
+        <h2>How the LSID Authority Works</h2>
+        <p>LSID Authorities are quite simple. A client application "does something clever" with DNS
+            in order to find an authority's domain (I'll talk about this a little later on). Once it
+            has got the domain it appends "/authority/" to make a URL that it calls to retrieve a
+            WSDL file. WSDL files can be quite complex but they have been written for us so we don't
+            have to worry about them too much - we can use simple template files for them. The file
+            the client gets back tells it how to access the getAvailableServices(LSID lsid) method.
+            Because we are only dealing with the HTTP GET bindings here, this means it contains the
+            URL the client must call to invoke this method. </p>
+        <p>The client calls the URL for the getAvailableServices(LSID lsid) method appending
+            ?lsid=&lt;theLSID&gt; and gets back another WSDL file. This file contains the
+            URLs that must be called for each of the methods associated with the LSID it passed in.
+            Once the client has this list of URLs it calls the ones it needs to do things like get
+            the metadata or data associated with this LSID. The client passes values to these calls
+            by tacking them onto the end of the URLs just like an HTTP form submit where the
+            'method' attribute is set to GET. If you can write code to handle form submits you can
+            handle these calls. To summarise:</p>
+        <ol>
+            <li><strong>Stage 1:</strong> Client calls a script and gets a WSDL file with a URL in
+                it.</li>
+            <li><strong>Stage 2:</strong> Client calls the URL appending ?lsid=XYZ and gets another
+                WSDL file back with the URLs of the associated data and metadata access scripts in
+                it.</li>
+            <li><strong>Stage 3:</strong> Client calls the data and metadata access URLs passing
+                ?lsid=XYZ plus other GET parameters for each script.</li>
+        </ol>
+        <p>It is not rocket science. It is just like writing regular interactive web pages.</p>
+        <h2>Setting up the Authority</h2>
+        <p>The following things need to be done to get the authority working with your TapirLink data:<br>
+		(assumes PHP and any required URL rewrite rules are already set up)
+        <ol>
+            <li>Configure your web server so that all requests to &quot;http://yourhost/authority/&quot; are translated to &quot;http://yourhost/tapirlinkpath/lsid-authority/&quot;. This can easily be done through URL rewrite rules. The main README.txt file of TapirLink has more details about this kind of procedure.</li>
+            <li>Set the default file for this web directory to the &quot;index.php&quot; file.</li>
+            <li>In the TapirLink &quot;config&quot; directory, copy the file &quot;lsid_settings.xml.tmpl&quot; to a new file called &quot;lsid_settings.xml&quot; and adjust the settings to correctly map LSID namespaces to TAPIR calls that will 
+                fetch the metadata for the requested LSIDs. Multiple LSID namespaces can be used, each mapping to a different 
+                TapirLink resource if required. Make sure that &quot;lsid_settings.xml&quot; is readable by the web server. The query template specified in &quot;TAPIRTemplate&quot; must contain a parameterised filter where the parameter is called &quot;lsid&quot;.
+            </li>	
+            <li>By default these settings use the http://rs.tdwg.org/tapir/cs/dwc/1.4/template/dw_rdf_record.xml template which selects the
+                data record where the GlobalUniqueIdentifier mapped field is equal to the lsid that is passed in the query.  If you require 
+                different behaviour then you will either need to create a new template file (if you need to the TAPIR query to be run on different fields/mappings),
+                or alter the code (eg if the GlobalUniqueIdentifier in your dataset is not the entire LSID) - probably in the TpLsidResolver.php file.
+            </li>		
+            <li>Some LSID clients contain bugs that you may also want to handle on the server side. In some cases they may incorrectly append &quot;/authority&quot; in the calls, and in other cases they may incorrectly append &quot;?lsid=the_lsid&quot; without checking if the URL already contains the query separator &quot;?&quot;. URL rewrite rules can help overcoming this kind of problems. For instance, if you are running under an IIS web server and you have ISAPI Rewrite Lite installed, you can include the following URL rewrite rules in your &quot;http.ini&quot; file:
+            </li>
+        </ol>
+        </p>
+        <pre>
+# This rule corrects invalidly formatted LSID authority calls (where the url has incorrectly appended /authority to the 
+# authority location, eg http://localhost/tapirlink/index.php/authority/)
+RewriteRule ^(.+\/)index.php\/authority\/(.*) $1index.php$2
+
+# This rule removes the resource name from after the .php file and adds it as a query parameter (eg from 
+# http://localhost/tapirlink/index.php/resource?... to http://localhost/tapirlink/index.php?dsa=resource&...) 
+# and it also corrects erroneus use of additional query separators appended to the URL
+RewriteRule ^(.+\/)tapir.php\/([^\?\/]+)[\?\/]?(.*)[?](.*) $1tapir.php?dsa=$2(?3&$3)(?4&$4)
+        </pre>
+        <h2>Checking Responses</h2>
+        <p>We can now run through the three actions that an LSID client will do, but using our web browser
+            to check we are getting the right responses.</p>
+        <ol>
+            <li>
+                <strong>Check the Authority Responses</strong> Visit the URL
+                "http://&lt;YourDomain&gt;/authority/". You should see a small XML file
+                that defines a thing called a wsdl:port that contains an address which is the full
+                URL to index.php in the authority directory. This is the URL the client will call to
+                get the services URLs. If you don't get an XML file then it may be that your web
+                server was not properly configured to translate requests from "http://&lt;YourDomain&gt;/authority/" to "http://&lt;YourDomain&gt;/tapirlinkpath/lsid-authority/". Another possibility is that the web server does not have 'index.php' set up as a default index file for the directory.
+                You need to look at your server config for this.</li>
+            <li><strong>Check the Get Available Services Response</strong> Visit the URL
+                "http://&lt;YourDomain.org&gt;/authority/index.php?lsid=urn:lsid:example.org:example:123".
+                You should get a similar looking file but with two ports described. </li>
+            <li><strong>Check Metadata Response</strong> When you have changed the settings to point to the 
+		appropriate TAPIR call for your provider, you can check the metadata response by calling the URL given 
+		for the metadata port but append "?lsid=urn:lsid:example.org:example:123". You should get back the
+                RDF metadata for your TapirLink data.</li>
+        </ol>
+        <h2>Check the Authority with Launchpad</h2>
+        <p>I assume you have installed IBM Launchpad in IE. In the configuration section of
+            Launchpad set up an authority. This will need to be YourDomain.org (or whatever
+            authority you want to use in your test LSIDs) and point to the URL we tested in point 1
+            above - "http://&lt;YourDomain.org&gt;/authority/". Now resolve an LSID of your
+            choice. Something like "lsidres:urn:lsid:&lt;YourDomain.org&gt;:example:123" (depending on the data in the database you have linked to)
+            should work OK.</p>
+        <h2>LSIDs that Resolve Globally</h2>
+        <p>If you have got this far you have succeeded in setting up and testing an LSID. Unfortunately
+            they only resolve if the client knows the URL of the Authority. We need to do something
+            with DNS so that clients can discover the authority location automatically. This is the
+            "something clever" mentioned above and I refer you to the <a
+                href="http://lsid.sourceforge.net/v1/reference/tutorials/100/#sec4">relevant section
+            </a> in the Perl stack tutorial for this. If you have access to your own DNS server then
+            it is just a matter of making a new entry for your authority as described. If you don't
+            have direct access then it is a matter of writing to someone who can do it for you. </p>
+        <p>This may take a while as you may have to get a systems administrator to set things up so
+            once you have set it in motion you can think about the next stage - returning real
+            data/metadata.</p>
+        <h2>Authority Files</h2>
+        <p>The code that accompanies this document consists of 6 things:</p>
+        <ol>
+            <li><strong>index.php</strong> This is the script that actually acts as the LSID
+                Authority. Take a look at it. You should be able to understand it even if PHP is not
+                your language as it is very simple and well commented. All it does is look to see if
+                the client is passing an lsid parameter and either returns LsidAuthority.wsdl.php or
+                LsidDataServices.wsdl.php with the correct URLs written in.</li>
+            <li><strong>LsidAuthority.wsdl.php and LsidDataServices.wsdl.php</strong> The two template files used by
+                index.php. You probably won't edit these unless you need to add other services. Both are located in the &quot;templates&quot; directory.</li>
+            <li><strong>Three other wsdl files (SIDAuthorityServiceHTTPBindings.wsdl, LSIDDataServiceHTTPBindings.wsdl and LSIDPortTypes.wsdl).</strong> These files are supporting files for the
+                two template files. You do not need to edit them.</li>
+            <li><strong>data.php</strong> This script responds to LSID resolution calls to return object data and is not implemented. Since the data representation associated with LSIDs is never supposed to change, it is usually recommended to return all data as metadata.</li>
+            <li><strong>lsid_settings.xml.tmpl</strong> This file contains sample settings for the TAPIR call that the LSID call is converted to. It is located in the &quot;config&quot; directory.</li>
+             <li><strong>TpLsidResolver.php</strong> Main class responsible for LSID resolution. This file is located in the &quot;classes&quot; directory.</li>
+       </ol>
+        <h2>Error Handling</h2>
+        <p>There is no error handling in this code. The specification explains how errors
+            should be thrown in the HTTP GET binding and it is pretty simple - you just return them
+            in the HTTP header. At a minimum you should return an error if the client requests your
+            authority to serve an LSID it isn't responsible for. The first place to do this would be
+            to throw an error in index.php if the LSID didn't match a regular expression that
+            described your own LSIDs. i.e. if they had the wrong authority string or namespace.</p>
+    </body>
+</html>

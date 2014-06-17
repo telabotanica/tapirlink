@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<title>Tela Botanica - TapirLink accueil</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-language" content="fr" />
+		<meta name="revisit-after" content="15 days" />
+
+		<meta name="robots" content="index,follow" />
+		<meta name="author" content="Jean-Pascal MILCENT"/>
+		<meta name="keywords" content="Tela Botanica, TapirLink, accueil." />
+		<meta name="description" content="Accueil vers l'ensembles des ressources du TapirLink de Tela Botanica." />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="shortcut icon" type="image/x-icon" href="../sites/commun/generique/images/favicones/tela_botanica.ico" />
+		<link rel="icon" type="image/png" href="../sites/commun/generique/images/favicones/tela_botanica.png" />
+
+		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+		<style>
+			body {
+				padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+			}
+		</style>
+		<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="brand" href="#">Tela Botanica - TapirLink accueil</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<p>Voici les liens vers l'ensemble des outils disponible dans cette installation de TapirLink:</p>
+			<h2>Administration</h2>
+			<p>Nécessite des droits d'administrateur pour accéder à cette partie de TapirLink.</p>
+			<ul>
+				<li><a href="admin/index.php">Administrer votre TapirLink</a></li>
+				<li><a href="admin/check.php">Vérifier l'installation de TapirLink</a></li>
+				<li><a href="admin/check_update.php">Vérifier l'existence d'une nouvelle version de TapirLink</a></li>
+				<li><a href="admin/info.php">Vérifier l'installation de PHP</a></li>
+			</ul>
+			<h2>Client</h2>
+			<ul>
+				<li><a href="www/index.php">Accueil de TapirLink</a></li>
+				<li><a href="www/tapir_client.php">Client pour intéroger des services TAPIR</a></li>
+				<li><a href="http://www.tdwg.org/standards/449/">Documentation du protocole TAPIR</a></li>
+				<li><a href="www/lsid-authority/index.php">Résolveur de LSID</a> et <a href="www/lsid-authority/readme.html">sa documentation</a></li>
+			</ul>
+			<h2>Divers</h2>
+			<ul>
+				<li><a href="stats/index.php">Satistiques de ce TapirLink</a></li>
+				<li><a href="log/history.txt">Fichier de Log</a></li>
+				<li><a href="log/debug.txt">Fichier de déboguage</a></li>
+				<li><a href="depot/">Dossier contenant les fichiers XML, XSD...</a></li>
+			</ul>
+		</div>
+	</body>
+</html>

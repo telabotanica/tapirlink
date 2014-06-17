@@ -1,0 +1,169 @@
+<html>
+<head>
+<title>Flatfile Tutorial</title>
+<link rel="stylesheet" type="text/css" href="../media/style.css">
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">flatfile</td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+  		  [ <a href="../classtrees_flatfile.html" class="menu">class tree: flatfile</a> ]
+		  [ <a href="../elementindex_flatfile.html" class="menu">index: flatfile</a> ]
+		  [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+      <b>Packages:</b><br />
+              <a href="../li_flatfile.html">flatfile</a><br />
+            <br /><br />
+		<b>Tutorials/Manuals:</b><br />
+					<strong>Package-level:</strong>
+							<ul>
+	<li type="square"><a href="../flatfile/tutorial_flatfile.pkg.html">Flatfile Tutorial</a>
+</ul>
+
+									                        <b>Files:</b><br />
+      	  <div class="package">
+			<a href="../flatfile/_flatfile_flatfile_php.html">		flatfile.php
+		</a><br>
+	  </div><br />
+      
+            <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../flatfile/AndWhereClause.html">AndWhereClause</a><br />
+	    		<a href="../flatfile/CompositeWhereClause.html">CompositeWhereClause</a><br />
+	    		<a href="../flatfile/Flatfile.html">Flatfile</a><br />
+	    		<a href="../flatfile/LikeWhereClause.html">LikeWhereClause</a><br />
+	    		<a href="../flatfile/ListWhereClause.html">ListWhereClause</a><br />
+	    		<a href="../flatfile/NotWhere.html">NotWhere</a><br />
+	    		<a href="../flatfile/OrderBy.html">OrderBy</a><br />
+	    		<a href="../flatfile/OrWhereClause.html">OrWhereClause</a><br />
+	    		<a href="../flatfile/SimpleWhereClause.html">SimpleWhereClause</a><br />
+	    		<a href="../flatfile/WhereClause.html">WhereClause</a><br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<div><a name=""></a><div class="ref-title-box"><h1 class="ref-title">Flatfile Tutorial</h1>
+  <h2 class="ref-purpose">Example usage of flatfile class</h2></div>
+ <div class="ref-synopsis"><span class="author">Luke Plant</span></div>
+ <span><a name="intro"></a><h2 class="title">Introduction</h2><p>The Flatfile package is a small but very poweful set of classes for
+  database like access to text &quot;flat files&quot;.  It provides equivalents to
+  many of the common SQL commands.</p>
+  
+  <p>Below is an extended example of how to use Flatfile and the related classes.  The example is a table that holds 'posts' (such as a message on a message board), each with an ID, the title, the date, the author and the text of the post.</p></span> 
+ <span><a name="setup"></a><h2 class="title">Setup</h2><p>First we will set up some constants for the columns (not required, but encouraged!).</p>
+  <p><div class="listing"><pre><ol><li><a href="http://www.php.net/define">define</a><span class="src-sym">(</span><span class="src-str">'POST_ID'</span><span class="src-sym">,    </span><span class="src-num">0</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a href="http://www.php.net/define">define</a><span class="src-sym">(</span><span class="src-str">'POST_TITLE'</span><span class="src-sym">, </span><span class="src-num">1</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a href="http://www.php.net/define">define</a><span class="src-sym">(</span><span class="src-str">'POST_DATE'</span><span class="src-sym">,  </span><span class="src-num">2</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a href="http://www.php.net/define">define</a><span class="src-sym">(</span><span class="src-str">'POST_BY'</span><span class="src-sym">,    </span><span class="src-num">3</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a href="http://www.php.net/define">define</a><span class="src-sym">(</span><span class="src-str">'POST_TEXT'</span><span class="src-sym">,  </span><span class="src-num">4</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+</ol></pre></div></p>
+   <p>Now we need to create the database object and set it up. <a href="../flatfile/Flatfile.html#var$datadir">$datadir</a> is set to the directory where all the tables are stored.</p>
+   <p><div class="listing"><pre><ol><li><span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'flatfile.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><span class="src-var">$db </span>= <span class="src-key">new </span><span class="src-id"><a href="../flatfile/Flatfile.html">Flatfile</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><span class="src-var">$db</span><span class="src-sym">-&gt;</span><span class="src-id">datadir </span>= <span class="src-str">'data/'</span><span class="src-sym">;</span></li>
+</ol></pre></div></p></span>
+ <span><a name="select"></a><h2 class="title">SELECT</h2><p>To get all rows from a table, use <a href="../flatfile/Flatfile.html#methodselectAll">selectAll()</a>:</p>
+   <p><div class="listing"><pre><ol><li><span class="src-var">$allrows </span>= <span class="src-var">$db</span><span class="src-sym">-&gt;</span><span class="src-id">selectAll</span><span class="src-sym">(</span><span class="src-str">'posts.txt'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+</ol></pre></div></p>
+   <p>The result will be an array of arrays: $allrows[r][c] will contain the data for row r, column c, where r and c 
+   are integers (zero based indexes).</p>
+
+   <p>To get a single row that is identified by a unique field, use <a href="../flatfile/Flatfile.html#methodselectUnique">selectUnique()</a></p>
+   <p><div class="listing"><pre><ol><li><span class="src-var">$aSingleRow </span>= <span class="src-var">$db</span><span class="src-sym">-&gt;</span><span class="src-id">selectUnique</span><span class="src-sym">(</span><span class="src-str">'posts.txt'</span><span class="src-sym">, </span><span class="src-id">POST_ID</span><span class="src-sym">, </span><span class="src-str">'1234'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+</ol></pre></div></p>
+   <p>The result is a single array of the values in the specified row.</p>
+   
+
+   <p>To do a simple WHERE clause, e.g. get all posts from user 'joe', use <a href="../flatfile/Flatfile.html#methodselectWhere">selectWhere()</a> and <a href="../flatfile/SimpleWhereClause.html">SimpleWhereClause</a>:</p>   
+   <p><div class="listing"><pre><ol><li><span class="src-var">$rows </span>= <span class="src-var">$db</span><span class="src-sym">-&gt;</span><span class="src-id">selectWhere</span><span class="src-sym">(</span><span class="src-str">'posts.txt'</span><span class="src-sym">, </span></li>
+<li>                              <span class="src-key">new </span><span class="src-id"><a href="../flatfile/SimpleWhereClause.html">SimpleWhereClause</a></span><span class="src-sym">(</span><span class="src-id">POST_BY</span><span class="src-sym">, </span><span class="src-str">'='</span><span class="src-sym">, </span><span class="src-str">'joe'</span><span class="src-sym">))</span><span class="src-sym">;</span></li>
+</ol></pre></div></p>
+   <p>The output is an array of arrays, as for <a href="../flatfile/Flatfile.html#methodselectAll">selectAll()</a>.</p>
+
+   <p>To build a complex criteria that will select rows from user 'joe' made after the first of February 2005 (assuming the date column stores UNIX timestamps):</p>
+   <p><div class="listing"><pre><ol><li><span class="src-var">$compClause </span>= <span class="src-key">new </span><span class="src-id"><a href="../flatfile/AndWhereClause.html">AndWhereClause</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><span class="src-var">$compClause</span><span class="src-sym">-&gt;</span><span class="src-id">add</span><span class="src-sym">(</span><span class="src-key">new </span><span class="src-id"><a href="../flatfile/SimpleWhereClause.html">SimpleWhereClause</a></span><span class="src-sym">(</span><span class="src-id">POST_BY</span><span class="src-sym">, </span><span class="src-str">'='</span><span class="src-sym">, </span><span class="src-str">'joe'</span><span class="src-sym">, </span><span class="src-id"><a href="../flatfile/_flatfile_flatfile_php.html#defineSTRING_COMPARISON">STRING_COMPARISON</a></span><span class="src-sym">))</span><span class="src-sym">;</span></li>
+<li><span class="src-var">$compClause</span><span class="src-sym">-&gt;</span><span class="src-id">add</span><span class="src-sym">(</span><span class="src-key">new </span><span class="src-id"><a href="../flatfile/SimpleWhereClause.html">SimpleWhereClause</a></span><span class="src-sym">(</span><span class="src-id">POST_DATE</span><span class="src-sym">, </span><span class="src-str">'&gt;'</span><span class="src-sym">,  </span><a href="http://www.php.net/mktime">mktime</a><span class="src-sym">(</span><span class="src-num">0</span><span class="src-sym">, </span><span class="src-num">0</span><span class="src-sym">, </span><span class="src-num">0</span><span class="src-sym">, </span><span class="src-num">1</span><span class="src-sym">, </span><span class="src-num">2</span><span class="src-sym">, </span><span class="src-num">2005</span><span class="src-sym">)</span><span class="src-sym">, </span></li>
+<li>                                       <span class="src-id"><a href="../flatfile/_flatfile_flatfile_php.html#defineINTEGER_COMPARISON">INTEGER_COMPARISON</a></span><span class="src-sym">))</span><span class="src-sym">;</span></li>
+</ol></pre></div></p>
+   
+   <p>You can also build the composite where clause in the constructor:</p>
+   <p><div class="listing"><pre><ol><li><span class="src-var">$compClause </span>= <span class="src-key">new </span><span class="src-id"><a href="../flatfile/AndWhereClause.html">AndWhereClause</a></span><span class="src-sym">(</span></li>
+<li>  <span class="src-key">new </span><span class="src-id"><a href="../flatfile/SimpleWhereClause.html">SimpleWhereClause</a></span><span class="src-sym">(</span><span class="src-id">POST_BY</span><span class="src-sym">, </span><span class="src-str">'='</span><span class="src-sym">, </span><span class="src-str">'joe'</span><span class="src-sym">, </span><span class="src-id"><a href="../flatfile/_flatfile_flatfile_php.html#defineSTRING_COMPARISON">STRING_COMPARISON</a></span><span class="src-sym">)</span><span class="src-sym">,</span></li>
+<li>  <span class="src-key">new </span><span class="src-id"><a href="../flatfile/SimpleWhereClause.html">SimpleWhereClause</a></span><span class="src-sym">(</span><span class="src-id">POST_DATE</span><span class="src-sym">, </span><span class="src-str">'&gt;'</span><span class="src-sym">,  </span></li>
+<li>                        <a href="http://www.php.net/mktime">mktime</a><span class="src-sym">(</span><span class="src-num">0</span><span class="src-sym">, </span><span class="src-num">0</span><span class="src-sym">, </span><span class="src-num">0</span><span class="src-sym">, </span><span class="src-num">1</span><span class="src-sym">, </span><span class="src-num">2</span><span class="src-sym">, </span><span class="src-num">2005</span><span class="src-sym">)</span><span class="src-sym">, </span><span class="src-id"><a href="../flatfile/_flatfile_flatfile_php.html#defineINTEGER_COMPARISON">INTEGER_COMPARISON</a></span><span class="src-sym">))</span><span class="src-sym">;</span></li>
+</ol></pre></div></p>
+
+   <p>To use the clause, and only return the first 5 posts, sorted in date order descending, do this:</p>
+   <p><div class="listing"><pre><ol><li><span class="src-var">$rows </span>= <span class="src-var">$db</span><span class="src-sym">-&gt;</span><span class="src-id">selectWhere</span><span class="src-sym">(</span><span class="src-str">'posts.txt'</span><span class="src-sym">, </span><span class="src-var">$compClause</span><span class="src-sym">, </span><span class="src-num">5</span><span class="src-sym">, </span></li>
+<li>                          <span class="src-key">new </span><span class="src-id"><a href="../flatfile/OrderBy.html">OrderBy</a></span><span class="src-sym">(</span><span class="src-id">POST_DATE</span><span class="src-sym">, </span><span class="src-id"><a href="../flatfile/_flatfile_flatfile_php.html#defineDESCENDING">DESCENDING</a></span><span class="src-sym">, </span><span class="src-id"><a href="../flatfile/_flatfile_flatfile_php.html#defineINTEGER_COMPARISON">INTEGER_COMPARISON</a></span><span class="src-sym">))</span><span class="src-sym">;</span></li>
+</ol></pre></div></p>
+   <p>(This introduces the $limit and $orderBy parameters of <a href="../flatfile/Flatfile.html#methodselectWhere">selectWhere()</a>)</p>
+
+   <p>You can of course use any <a href="../flatfile/WhereClause.html">WhereClause</a> object as part of a <a href="../flatfile/CompositeWhereClause.html">CompositeWhereClause</a>
+   and so can have a combination of AND and OR operators.</p>
+   
+   <p>The 'WhereClause' method can be used with <a href="../flatfile/Flatfile.html#methoddeleteWhere">deleteWhere()</a>
+ and <a href="../flatfile/Flatfile.html#methodupdateSetWhere">updateSetWhere()</a>.  Other <a href="../flatfile/WhereClause.html">WhereClause</a> classes are available
+ and if they are not sufficient you can create your own very easily.</p>
+
+   <p>You can order on multiple fields by supplying an array of <a href="../flatfile/OrderBy.html">OrderBy</a> objects instead of a single one.</p></span>
+ <span><a name="insert"></a><h2 class="title">INSERT</h2><p>To insert a row, use <a href="../flatfile/Flatfile.html#methodinsert">insert()</a> or <a href="../flatfile/Flatfile.html#methodinsertWithAutoId">insertWithAutoId()</a>.  The latter will do an auto-increment on a specified field, and will return the newly generated ID.</p>
+  <p><div class="listing"><pre><ol><li><span class="src-var">$newpost</span><span class="src-sym">[</span><span class="src-id">POST_ID</span><span class="src-sym">] </span>= <span class="src-str">'0'</span><span class="src-sym">; </span><span class="src-comm">// dummy</span></li>
+<li><span class="src-var">$newpost</span><span class="src-sym">[</span><span class="src-id">POST_TITLE</span><span class="src-sym">] </span>= <span class="src-str">'A great post'</span><span class="src-sym">;</span></li>
+<li><span class="src-var">$newpost</span><span class="src-sym">[</span><span class="src-id">POST_DATE</span><span class="src-sym">] </span>= <a href="http://www.php.net/time">time</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><span class="src-var">$newpost</span><span class="src-sym">[</span><span class="src-id">POST_BY</span><span class="src-sym">]   </span>= <span class="src-str">'Me'</span><span class="src-sym">;</span></li>
+<li><span class="src-var">$newpost</span><span class="src-sym">[</span><span class="src-id">POST_TEXT</span><span class="src-sym">]  </span>= <span class="src-str">'I have discovered a truly wonderful cure to cancer </span></li>
+<li><span class="src-str">                       which this line of code is too small to contain'</span><span class="src-sym">;</span></li>
+<li><span class="src-var">$newId </span>= <span class="src-var">$db</span><span class="src-sym">-&gt;</span><span class="src-id">insertWithAutoId</span><span class="src-sym">(</span><span class="src-str">'posts.txt'</span><span class="src-sym">, </span><span class="src-id">POST_ID</span><span class="src-sym">, </span><span class="src-var">$newpost</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+</ol></pre></div></p></span>
+ <span><a name="update"></a><h2 class="title">UPDATE</h2><p>To set a number of fields in a table, you can use <a href="../flatfile/Flatfile.html#methodupdateSetWhere">updateSetWhere()</a>.  Suppose user joe has a sex change operation:</p>
+
+   <p><div class="listing"><pre><ol><li><span class="src-var">$db</span><span class="src-sym">-&gt;</span><span class="src-id">updateSetWhere</span><span class="src-sym">(</span><span class="src-str">'posts.txt'</span><span class="src-sym">, </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-id">POST_BY </span>=&gt; <span class="src-str">'jane'</span><span class="src-sym">)</span><span class="src-sym">,</span></li>
+<li>                    <span class="src-key">new </span><span class="src-id"><a href="../flatfile/SimpleWhereClause.html">SimpleWhereClause</a></span><span class="src-sym">(</span><span class="src-id">POST_BY</span><span class="src-sym">, </span><span class="src-str">'='</span><span class="src-sym">, </span><span class="src-str">'joe'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+</ol></pre></div></p>
+   <p>The second parameter can contain any number of fields (not just one as above), or even the complete row.</p></span>
+ <span><a name="delete"></a><h2 class="title">DELETE</h2><p><a href="../flatfile/Flatfile.html#methoddeleteWhere">deleteWhere()</a> works in a similar fashion to updateSetWhere() and selectWhere().  'joe', or should I say 'jane', later decides that she wants to disown all posts she made while still a man:</p>
+
+   <p><div class="listing"><pre><ol><li><span class="src-var">$db</span><span class="src-sym">-&gt;</span><span class="src-id">updateSetWhere</span><span class="src-sym">(</span><span class="src-str">'posts.txt'</span><span class="src-sym">, </span><span class="src-key">new </span><span class="src-id"><a href="../flatfile/AndWhereClause.html">AndWhereClause</a></span><span class="src-sym">(</span></li>
+<li>        <span class="src-key">new </span><span class="src-id"><a href="../flatfile/SimpleWhereClause.html">SimpleWhereClause</a></span><span class="src-sym">(</span><span class="src-id">POST_BY</span><span class="src-sym">, </span><span class="src-str">'='</span><span class="src-sym">, </span><span class="src-str">'jane'</span><span class="src-sym">, </span><span class="src-id"><a href="../flatfile/_flatfile_flatfile_php.html#defineSTRING_COMPARISON">STRING_COMPARISON</a></span><span class="src-sym">)</span><span class="src-sym">,</span></li>
+<li>        <span class="src-key">new </span><span class="src-id"><a href="../flatfile/SimpleWhereClause.html">SimpleWhereClause</a></span><span class="src-sym">(</span><span class="src-id">POST_DATE</span><span class="src-sym">, </span><span class="src-str">'&lt;'</span><span class="src-sym">, </span><a href="http://www.php.net/mktime">mktime</a><span class="src-sym">(</span><span class="src-num">0</span><span class="src-sym">,</span><span class="src-num">0</span><span class="src-sym">,</span><span class="src-num">0</span><span class="src-sym">,</span><span class="src-num">3</span><span class="src-sym">,</span><span class="src-num">4</span><span class="src-sym">,</span><span class="src-num">2004</span><span class="src-sym">)</span><span class="src-sym">, </span></li>
+<li>                              <span class="src-id"><a href="../flatfile/_flatfile_flatfile_php.html#defineINTEGER_COMPARISON">INTEGER_COMPARISON</a></span><span class="src-sym">))</span><span class="src-sym">;</span></li>
+</ol></pre></div></p></span>
+ <span><a name="orderby"></a><h2 class="title">Custom comparisons</h2><p><a href="../flatfile/OrderBy.html">OrderBy</a> and <a href="../flatfile/SimpleWhereClause.html">SimpleWhereClause</a> use the constants STRING_COMPARISON,
+   NUMERIC_COMPARISON and INTEGER_COMPARISON to qualify ordering and comparison operations.  However,
+   these constants are in fact just the names of functions that do the comparison of
+   two variables.  You can therefore use your own function or a builtin PHP function wherever 
+   one of these constants can be used.  This means, for example, that you can use
+   <a href="http://www.php.net/strcasecmp">http://www.php.net/strcasecmp</a> to do case insensitive string comparisons:</p>
+
+   <p>This will match all posts by joe or JOE or jOe:
+     <div class="listing"><pre><ol><li><span class="src-var">$db</span><span class="src-sym">-&gt;</span><span class="src-id">selectWhere</span><span class="src-sym">(</span><span class="src-str">'posts.txt'</span><span class="src-sym">, </span></li>
+<li>       <span class="src-key">new </span><span class="src-id"><a href="../flatfile/SimpleWhereClause.html">SimpleWhereClause</a></span><span class="src-sym">(</span><span class="src-id">POST_BY</span><span class="src-sym">, </span><span class="src-str">'='</span><span class="src-sym">, </span><span class="src-str">'joe'</span><span class="src-sym">, </span><span class="src-str">'strcasecmp'</span><span class="src-sym">))</span><span class="src-sym">;</span></li>
+</ol></pre></div></p>
+   <p>You can of course create your own function, providing it works equivalently
+   to <a href="http://www.php.net/strcmp">http://www.php.net/strcmp</a></p></span></div>
+        <div class="credit">
+		    <hr />
+		    Documentation generated on Thu, 22 Dec 2005 12:59:49 +0000 by <a href="http://www.phpdoc.org">phpDocumentor 1.3.0RC3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

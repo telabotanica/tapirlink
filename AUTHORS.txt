@@ -1,0 +1,31 @@
+Renato De Giovanni <renato [at] cria . org . br>
+
+   * Ported all DiGIR PHP provider code to make it  
+     compatible with the TAPIR protocol.
+
+Dave Vieglais <vieglais [at] ku . edu>
+
+   * Original developer of the DiGIR PHP provider.
+
+Craig Wieczorek
+
+   * Implemented the statistics.
+
+Giorgos Ksouris <ksouris [at] gbif . org>
+
+   * Helped with testing.
+
+Kevin Richards <RichardsK [at] landcareresearch . co . nz>
+
+   * Discovered how to make IIS work with TapirLink accesspoints.
+   * Implemented LSID resolution.
+
+Roger Hyam <roger [at] tdwg . org>
+
+   * Implemented the CNS (Concept Name Server) handler.
+   * Improved response structure parsing when there are cascading 
+     imports or includes.
+
+Jean-Pascal Milcent <jpm [at] tela-botanica . org>
+
+	* See changelog [Tela Botanica]

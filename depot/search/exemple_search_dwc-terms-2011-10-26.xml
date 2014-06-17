@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<request xmlns="http://rs.tdwg.org/tapir/1.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://rs.tdwg.org/tapir/1.0 http://rs.tdwg.org/tapir/1.0/schema/tdwg_tapir.xsd">
+	<header>
+		<destination resource="cel">http://localhost/gbif/tapirlink/tapir.php/cel</destination>
+		<type>tapir</type>
+	</header>
+	<search count="true" start="0" limit="10">
+		<externalOutputModel location="http://www.tela-botanica.org/tapirlink/depot/ref/dwc_2011_10_26_simple.xml" />
+		<filter>
+			<and>  
+				<greaterThanOrEquals>
+					<concept id="http://rs.tdwg.org/dwc/dwcore/ScientificName"/>
+					<literal value="Aa"/>
+				</greaterThanOrEquals>
+				<lessThanOrEquals>
+					<concept id="http://rs.tdwg.org/dwc/dwcore/ScientificName"/>
+					<literal value="Az"/>
+				</lessThanOrEquals>
+			</and>
+		</filter>
+		<records limit="10" start="0" />
+		<count>true</count>
+	</search>
+</request>

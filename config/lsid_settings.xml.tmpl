@@ -1,0 +1,15 @@
+<Settings>
+  <!-- This is a sample configuration file for the LSID resolution service. You will need
+       to copy this file to a new one called lsid_settings.xml and then make the 
+       necessary changes. The following example will point an LSID metadata call for:
+       urn:lsid:yourDomain:example:123 
+       to the following URL:
+       TAPIR_accesspoint_for_the_resource_myres?op=search&amp;envelope=0&amp;t=http://rs.tdwg.org/tapir/cs/dwc/1.4/template/dw_rdf_record.xml
+       The template must contain a parameter called lsid as part of a filter condition.
+  -->
+  <LSIDNamespace Name="example">
+    <TAPIRResource>myres</TAPIRResource>
+    <TAPIROperation>search</TAPIROperation>
+    <TAPIRTemplate>http://rs.tdwg.org/tapir/cs/dwc/1.4/template/dw_rdf_record.xml</TAPIRTemplate>
+  </LSIDNamespace>
+</Settings>

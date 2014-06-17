@@ -1,0 +1,218 @@
+<html>
+<head>
+<title>Docs For Class CompositeWhereClause</title>
+<link rel="stylesheet" type="text/css" href="../media/style.css">
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">flatfile</td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+  		  [ <a href="../classtrees_flatfile.html" class="menu">class tree: flatfile</a> ]
+		  [ <a href="../elementindex_flatfile.html" class="menu">index: flatfile</a> ]
+		  [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+      <b>Packages:</b><br />
+              <a href="../li_flatfile.html">flatfile</a><br />
+            <br /><br />
+		<b>Tutorials/Manuals:</b><br />
+					<strong>Package-level:</strong>
+							<ul>
+	<li type="square"><a href="../flatfile/tutorial_flatfile.pkg.html">Flatfile Tutorial</a>
+</ul>
+
+									                        <b>Files:</b><br />
+      	  <div class="package">
+			<a href="../flatfile/_flatfile_flatfile_php.html">		flatfile.php
+		</a><br>
+	  </div><br />
+      
+            <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../flatfile/AndWhereClause.html">AndWhereClause</a><br />
+	    		<a href="../flatfile/CompositeWhereClause.html">CompositeWhereClause</a><br />
+	    		<a href="../flatfile/Flatfile.html">Flatfile</a><br />
+	    		<a href="../flatfile/LikeWhereClause.html">LikeWhereClause</a><br />
+	    		<a href="../flatfile/ListWhereClause.html">ListWhereClause</a><br />
+	    		<a href="../flatfile/NotWhere.html">NotWhere</a><br />
+	    		<a href="../flatfile/OrderBy.html">OrderBy</a><br />
+	    		<a href="../flatfile/OrWhereClause.html">OrWhereClause</a><br />
+	    		<a href="../flatfile/SimpleWhereClause.html">SimpleWhereClause</a><br />
+	    		<a href="../flatfile/WhereClause.html">WhereClause</a><br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<h1>Class: CompositeWhereClause</h1>
+Source Location: /flatfile.php<br /><br />
+
+
+<table width="100%" border="0">
+<tr><td valign="top">
+
+<h3><a href="#class_details">Class Overview</a></h3>
+<pre><a href="../flatfile/WhereClause.html">WhereClause</a>
+   |
+   --CompositeWhereClause</pre><br />
+<div class="description">Abstract class that combines zero or more <a href="../flatfile/WhereClause.html">WhereClause</a> objects  together.</div><br /><br />
+
+
+
+
+
+
+
+</td>
+
+<td valign="top">
+<h3><a href="#class_vars">Variables</a></h3>
+<ul>
+    <li><a href="../flatfile/CompositeWhereClause.html#var$clauses">$clauses</a></li>
+  </ul>
+</td>
+
+
+<td valign="top">
+<h3><a href="#class_methods">Methods</a></h3>
+<ul>
+    <li><a href="../flatfile/CompositeWhereClause.html#methodadd">add</a></li>
+  </ul>
+</td>
+
+</tr></table>
+<hr />
+
+<table width="100%" border="0"><tr>
+
+
+<td valign="top">
+<h3>Child classes:</h3>
+<div class="tags">
+<dl>
+<dt><a href="../flatfile/OrWhereClause.html">OrWhereClause</a></dt>
+	<dd><a href="../flatfile/CompositeWhereClause.html">CompositeWhereClause</a> that does an OR on all its  child WhereClauses.</dd>
+</dl>
+<dl>
+<dt><a href="../flatfile/AndWhereClause.html">AndWhereClause</a></dt>
+	<dd><a href="../flatfile/CompositeWhereClause.html">CompositeWhereClause</a> that does an AND on all its  child WhereClauses.</dd>
+</dl>
+</div>
+</td>
+
+
+
+<td valign="top">
+<h3>Inherited Methods</h3>
+<div class="tags">
+<h4>Class: <a href="../flatfile/WhereClause.html">WhereClause</a></h4>
+<dl>
+    <dt>
+    <a href="../flatfile/WhereClause.html#methodtestRow">WhereClause::testRow()</a>
+  </dt>
+  <dd>
+    Tests a table row object
+  </dd>
+  </dl>
+</div>
+</td>
+
+</tr></table>
+<hr />
+
+<a name="class_details"></a>
+<h3>Class Details</h3>
+<div class="tags">
+[line 527]<br />
+Abstract class that combines zero or more <a href="../flatfile/WhereClause.html">WhereClause</a> objects  together.<br /><br /></div><br /><br />
+<div class="top">[ <a href="#top">Top</a> ]</div><br />
+
+<hr />
+<a name="class_vars"></a>
+<h3>Class Variables</h3>
+<div class="tags">
+	<a name="var$clauses"></a>
+	<p></p>
+	<h4>$clauses = <span class="value">array()</span></h4>
+	<p>[line 533]</p>
+  <br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>var:</b>&nbsp;&nbsp;</td><td>Stores the child clauses</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>array</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+</div><br />
+
+<hr />
+<a name="class_methods"></a>
+<h3>Class Methods</h3>
+<div class="tags">
+  <hr />
+	<a name="methodadd"></a>
+	<h3>method add <span class="smalllinenumber">[line 539]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void add(
+<a href="../flatfile/WhereClause.html">WhereClause</a>
+$whereClause)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Add a <a href="../flatfile/WhereClause.html">WhereClause</a> to the list of clauses to be used for testing<br /><br /><br /><br />
+
+
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type"><a href="../flatfile/WhereClause.html">WhereClause</a>&nbsp;&nbsp;</td>
+        <td><b>$whereClause</b>&nbsp;&nbsp;</td>
+        <td>The WhereClause object to add</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+</div><br />
+
+
+        <div class="credit">
+		    <hr />
+		    Documentation generated on Thu, 22 Dec 2005 12:59:50 +0000 by <a href="http://www.phpdoc.org">phpDocumentor 1.3.0RC3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
