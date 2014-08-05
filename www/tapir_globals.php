@@ -57,7 +57,7 @@ if (  defined( 'TP_RUNNING_TAPIR' ) )
 // values for the defines in this file.
 ini_set( 'include_path', '.' );
 
-$tmp = @include_once( 'localconfig.php' );
+$tmp = include_once( 'localconfig.php' );
 
 /*
 * Indicate the minimum level of diagnostic messages to appear in responses.
@@ -170,8 +170,8 @@ ini_set( 'include_path', TP_INCLUDE_PATH .TP_PATH_SEP. $current_include_path );
 
 // A mini-test of the include path
 
-$tmp = @include_once( 'PEAR.php' );
-$tmp = @include_once( 'Log.php' );
+$tmp = include_once( 'PEAR.php' );
+$tmp = include_once( 'Log.php' );
 
 if ( ! $tmp )
 {
@@ -612,5 +612,3 @@ define( 'TP_XML_PREFIX'  , 'xml'   );
 define( 'TP_XSI_PREFIX'  , 'xsi'   );
 
 define('XML_HEADER', '<?xml version="1.0" encoding="utf-8" ?>');
-
-?>
