@@ -155,13 +155,15 @@ function getTableList(&$Config)
 /////////////////////////////////////////////////
 //Start here
 /////////////////////////////////////////////////
-define('_DEBUG',FALSE);
-$emsg = '';
-
 // should be included first
 require_once('../www/tapir_globals.php');
+if ( ! defined( '_DEBUG' ) ) {
+	define('_DEBUG', FALSE);
+}
 require_once('TpUtils.php');
 require_once('TpResources.php');
+
+$emsg = '';
 
 //dv: update the include path to point to the digir code base
 ini_set('include_path',ini_get('include_path').TP_PATH_SEP.realpath('../www/'));
