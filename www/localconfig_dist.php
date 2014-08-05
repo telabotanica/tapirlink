@@ -35,12 +35,12 @@
 * A more sendible location for the config files would be something like
 * c:/tapirlink/config
 */
-//define('TP_CONFIG_DIR','c:/tapirlink/config');
+//define('TP_CONFIG_DIR','/var/www/tapirlink/config');
 
 /**
 * Location of the log files.
 */
-//define('TP_LOG_DIR','c:/tapirlink/log');
+//define('TP_LOG_DIR','/var/www/tapirlink/log');
 
 /**
 * The name of the file that log information will be recorded to.
@@ -59,7 +59,7 @@
 *                    required for statistics stracking)
 * 7 = PEAR_LOG_DEBUG
 */
-//define('TP_LOG_LEVEL', PEAR_LOG_INFO);
+//define('TP_LOG_LEVEL', 7);
 
 /*
 * Indicate the minimum level of diagnostic messages to appear in responses.
@@ -115,7 +115,7 @@
 /**
 * Location of the statistics files.
 */
-//define('TP_STATISTICS_DIR','c:/tapirlink/statistics');
+//define('TP_STATISTICS_DIR','/var/www/tapirlink/statistics');
 
 /**
 * Set to true if you want to use cache
@@ -235,12 +235,12 @@
 * NOTE: Make sure you follow the IETF RFC 3066 standard for the codes:
 * http://www.ietf.org/rfc/rfc3066.txt
 */
-//$langs = array('en' => 'English',
-//               'fr' => 'French',
-//               'de' => 'German',
-//               'it' => 'Italian',
-//               'pt' => 'Portuguese',
-//               'es' => 'Spanish');
+//$langs = array('fr' => 'French',
+//	'en' => 'English',
+//	'de' => 'German',
+//	'it' => 'Italian',
+//	'pt' => 'Portuguese',
+//	'es' => 'Spanish');
 //
 //define( 'TP_LANG_OPTIONS', serialize( $langs ) );
 
@@ -255,15 +255,16 @@
 * This can be especially useful for providers that are behind a proxy or
 * for providers that only want to load local files.
 */
-//define('TP_LOCAL_REPOSITORY', 'http://localhost/somepath/' or 'file:///somepath' or '/somelocalpath');
+//define('TP_LOCAL_REPOSITORY', 'http://localhost/tapirlink/depot/local');
 
 /**
 * Indicates how file retrieval should happen: prefer original files (usually remote
 * and always the most up-to-date), prefer local copies (manually stored in
 * TP_LOCAL_REPOSITORY) or use only local copies. Note that this has nothing to do
 * with the other caching settings.
+* Possible values : 'prefer_original' or 'prefer_local' or 'only_local'
 */
-//define('TP_FILE_RETRIEVAL_BEHAVIOUR', 'prefer_original' or 'prefer_local' or 'only_local');
+//define('TP_FILE_RETRIEVAL_BEHAVIOUR', 'prefer_local');
 
 /**
 * List of accepted domains for remote resource retrieval. Use an empty array for no
@@ -273,7 +274,7 @@
 * dublincore.org, www.w3.org, darwincore.googlecode.com and the local values
 * $_SERVER['HTTP_HOST'], 127.0.0.1 and localhost
 */
-//$domains = array( 'www.tela-botanica.org', 'tdwg.org', 'gbif.org', 'cria.org.br', 'dublincore.org', 'www.w3.org', 'darwincore.googlecode.com', $_SERVER['HTTP_HOST'], '127.0.0.1', 'localhost' );
+//$domains = array( 'api.tela-botanica.org', 'tdwg.org', 'gbif.org', 'cria.org.br', 'dublincore.org', 'www.w3.org', 'darwincore.googlecode.com', $_SERVER['HTTP_HOST'], '127.0.0.1', 'localhost' );
 //
 //define( 'TP_ACCEPTED_DOMAINS', serialize( $domains ) );
 
