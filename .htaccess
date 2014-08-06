@@ -1,0 +1,11 @@
+<Files "index.html">
+    AddDefaultCharset utf-8 
+</Files>
+RewriteEngine On
+
+# si le fichier ou le dossier existe dans le systeme de fichier on l'utilise directement
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_FILENAME} !-f
+
+# Redirection vers les services TapirLink
+RewriteRule ^tapir(.*)$ www/tapir$1 [QSA,L]
