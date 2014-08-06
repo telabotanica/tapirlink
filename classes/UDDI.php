@@ -96,8 +96,8 @@ require_once 'PEAR.php';
  * @link http://www.uddi.org/
  *
  * pearified version of phpUDDI by Stephens & Reynolds
- * 
- * 
+ *
+ *
  * @category Web Services
  * @package  UDDI
  * @version  0.2.3
@@ -165,7 +165,7 @@ Variables supported:
       array('url' => 'url_for_publish',
         'port' => 443)));
   </code>
-  Internally this is accessed as 
+  Internally this is accessed as
   <code>URL = $_regarray['registry_name']['Inquiry']['url']</code>
   , and
   <code>port = $_regarray['registry_name']['Inquiry']['port']</code>
@@ -235,7 +235,7 @@ echo "<pre>$result</pre>";
 // {{{ constants
 /**
  * version of corresponding phpUDDI version
- * still included so that moving from phpUDDI to PEAR::UDDI is easier 
+ * still included so that moving from phpUDDI to PEAR::UDDI is easier
  */
 
 define('UDDI_PHP_LIB_VERSION', '0.3.1p'); //suffix p = PEAR :-)
@@ -247,7 +247,7 @@ define('UDDI_PHP_LIB_VERSION', '0.3.1p'); //suffix p = PEAR :-)
  * UDDI
  *
  * class that implements the UDDI API
- * 
+ *
  * @package  UDDI
  * @author   Christian Wenz <chw@hauser-wenz.de>
  * @author   Tobias Hauser <th@hauser-wenz.de>
@@ -263,7 +263,7 @@ class UDDI extends PEAR
     var $_version = '0.2.3';
 
     /**
-     * whether to return the UDDI call´s response headers
+     * whether to return the UDDI calls response headers
      * ('headers'), the body ('body'), or both ('all', default)
      * @var string $_returnMode
      */
@@ -360,7 +360,7 @@ class UDDI extends PEAR
      *
      * @access   public
      * @param    string   $registry    name of registry to use (defaults to SAP)
-     * @param    integer  $version     UDDI version to use 
+     * @param    integer  $version     UDDI version to use
      */
     function UDDI($registry = 'SAP', $version = 1)
     {
@@ -375,7 +375,7 @@ class UDDI extends PEAR
      *
      * @access   public
      * @param    string   $registry    name of registry to use
-     * @param    integer  $version     UDDI version to use 
+     * @param    integer  $version     UDDI version to use
      */
     function splitUrl($registry, $version)
     {
@@ -482,18 +482,18 @@ class UDDI extends PEAR
             $message = $this->assembleInquiry($method, $params);
         }
         $data = $this->post($message);
-        
+
         switch ($this->_returnMode) {
-            case 'headers': 
+            case 'headers':
                 $pos = strpos($data, "\r\n\r\n");
                 if ($pos !== false) {
                     $data = substr($data, 0, $pos);
                 }
-                // if no blank line is found, 
+                // if no blank line is found,
                 // assume that only headers were returned
                 return $data;
-                break; 
-            case 'body': 
+                break;
+            case 'body':
                 $pos = strpos($data, "\r\n\r\n");
                 if ($pos !== false) {
                     $data = substr($data, $pos + 4);
@@ -501,13 +501,13 @@ class UDDI extends PEAR
                 } else {
                     return '';
                 }
-                break; 
-            case 'all': 
+                break;
+            case 'all':
                 return $data;
-                break; 
-            default: 
+                break;
+            default:
                 return PEAR::raiseError('Unknown return mode.');
-                break;                 
+                break;
         }
     }
 
@@ -546,7 +546,7 @@ class UDDI extends PEAR
         }
 
         if (isset($params['serviceKey']) && ($params['serviceKey'] != '')) {
-    
+
             if ($method == 'find_binding') {
                 $attrib .= ' serviceKey="' . $params['serviceKey'] . '"';
             }
@@ -755,7 +755,7 @@ class UDDI extends PEAR
             if (isset($params['description'])) {
                 $element .= $this->getMultiElement('description', 'lang', $params['description']);
             }
-            if ((isset($params['accessPoint'])) && ($params['accessPoint'] != '') && 
+            if ((isset($params['accessPoint'])) && ($params['accessPoint'] != '') &&
                 (isset($params['URLType'])) && ($params['URLType'] != '')) {
                 $element .= '<accessPoint URLType="' . $params['URLType'] . '">';
                 $element .= $params['accessPoint'] . '</accessPoint>';
@@ -794,10 +794,10 @@ class UDDI extends PEAR
     /**
      * Returns the XML representation of an element that can appear several
      * times with an optional attribute. In UDDI this happens with language
-     * aware elements (with "lang" attribute) or with other elements that 
-     * can have the "useType" attribute. $param can be a simple string 
+     * aware elements (with "lang" attribute) or with other elements that
+     * can have the "useType" attribute. $param can be a simple string
      * (interpreted as a single element without the attribute) or an array
-     * of strings (interpreted as multiple elements without the attribute) 
+     * of strings (interpreted as multiple elements without the attribute)
      * or an array of arrays with keys 'content' and $attribute.
      *
      * @access   public

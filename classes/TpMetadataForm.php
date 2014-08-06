@@ -1,22 +1,22 @@
 <?php
 /**
  * $Id: TpMetadataForm.php 1986 2009-03-21 20:27:22Z rdg $
- * 
+ *
  * LICENSE INFORMATION
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details:
- * 
+ *
  * http://www.gnu.org/copyleft/gpl.html
- * 
- * 
+ *
+ *
  * @author Renato De Giovanni <renato [at] cria . org . br>
  */
 
@@ -27,21 +27,21 @@ require_once('TpDiagnostics.php');
 require_once('TpResources.php');
 require_once('TpResource.php');
 
-class TpMetadataForm extends TpWizardForm 
+class TpMetadataForm extends TpWizardForm
 {
     var $mStep = 1;
     var $mLabel = 'Metadata';
 
-    function TpMetadataForm( ) 
+    function TpMetadataForm( )
     {
 
     } // end of member function TpMetadataForm
 
-    function LoadDefaults( ) 
+    function LoadDefaults( )
     {
         $r_metadata =& $this->mResource->GetMetadata();
 
-        if ( $this->mResource->HasMetadata() ) 
+        if ( $this->mResource->HasMetadata() )
         {
             $msg = "If you have just imported this resource, please complete at least the mandatory fields below\n(with a ".TP_MANDATORY_FIELD_FLAG."before the label) and revise the next forms to finish the configuration process.";
 
@@ -70,18 +70,18 @@ class TpMetadataForm extends TpWizardForm
 
     } // end of member function LoadDefaults
 
-    function LoadFromSession( ) 
+    function LoadFromSession( )
     {
         $r_metadata =& $this->mResource->GetMetadata();
         $r_metadata->LoadFromSession();
 
     } // end of member function LoadFromSession
 
-    function LoadFromXml( ) 
+    function LoadFromXml( )
     {
         $r_metadata =& $this->mResource->GetMetadata();
 
-        if ( $this->mResource->HasMetadata() ) 
+        if ( $this->mResource->HasMetadata() )
         {
             $metadata_file = $this->mResource->GetMetadataFile();
 
@@ -134,14 +134,14 @@ class TpMetadataForm extends TpWizardForm
                "          {\n".
                "            newAccessPoint += parts[i];\n".
                "          }\n".
-               "      }\n". 
+               "      }\n".
                "      document.wizard.accesspoint.value = newAccessPoint;\n".
                "    }\n".
                "  }\n";
 
     } // end of member function GetJavascript
 
-    function DisplayForm( ) 
+    function DisplayForm( )
     {
         $r_metadata =& $this->mResource->GetMetadata();
 
@@ -149,10 +149,10 @@ class TpMetadataForm extends TpWizardForm
 
     } // end of member function DisplayForm
 
-    function HandleEvents( ) 
+    function HandleEvents( )
     {
         // Clicked next or update
-        if ( isset( $_REQUEST['next'] ) or isset( $_REQUEST['update'] ) ) 
+        if ( isset( $_REQUEST['next'] ) or isset( $_REQUEST['update'] ) )
         {
             $update_resources = false;
 
@@ -163,14 +163,14 @@ class TpMetadataForm extends TpWizardForm
                 return;
             }
 
-            if ( isset( $_REQUEST['next'] ) ) 
+            if ( isset( $_REQUEST['next'] ) )
             {
                 // Set code so that GetMetadataFile (called next) can determine
-                // the name of the file for new resources. 
+                // the name of the file for new resources.
                 $this->mResource->SetCode( $r_metadata->GetId() );
             }
 
-            if ( ! $this->mResource->SaveMetadata() ) 
+            if ( ! $this->mResource->SaveMetadata() )
             {
                 return;
             }
@@ -188,7 +188,7 @@ class TpMetadataForm extends TpWizardForm
                     $r_resources->AddResource( $this->mResource );
                 }
 
-                // Saving here avoids the configurator to later try to find 
+                // Saving here avoids the configurator to later try to find
                 // the removed entry and therefore raise a warning
                 if ( ! $r_resources->Save() )
                 {
@@ -204,21 +204,21 @@ class TpMetadataForm extends TpWizardForm
 
     } // end of member function HandleEvents
 
-    function GetHtmlLabel( $labelId, $required ) 
+    function GetHtmlLabel( $labelId, $required )
     {
         $label = '?';
         $doc = '';
 
         $css = ( $required ) ? 'label_required' : 'label';
 
-        if ( $labelId == 'id') 
+        if ( $labelId == 'id')
         {
             $label = 'Local ID';
             $doc = 'A local identifier for the resource. This should be a short '.
                    'sequence of characters that can be used directly in URLs. It '.
                    'will be part of the default accesspoint.';
         }
-        else if ( $labelId == 'accesspoint') 
+        else if ( $labelId == 'accesspoint')
         {
             $label = 'Accesspoint';
             $doc = 'URL of the service. The default URL has this form:'.
@@ -230,44 +230,44 @@ class TpMetadataForm extends TpWizardForm
                    'You may also consider creating a PURL (see: http://purl.org/) '.
                    'to wrap your accesspoint.';
         }
-        else if ( $labelId == 'default_language') 
+        else if ( $labelId == 'default_language')
         {
             $label = 'Default language for the metadata fields below';
             $doc = 'Default language to be considered for all '.
                    'language aware metadata fields in this form '.
                    '(when not already specified at the field level).';
         }
-        else if ( $labelId == 'title') 
+        else if ( $labelId == 'title')
         {
             $label = 'Title';
             $doc = 'A title (name) for the resource.';
         }
-        else if ( $labelId == 'description') 
+        else if ( $labelId == 'description')
         {
             $label = 'Description';
             $doc = 'Description may include but is not limited to: an abstract, table of contents, reference to a graphical representation of content or a free-text account of the content.';
         }
-        else if ( $labelId == 'subjects') 
+        else if ( $labelId == 'subjects')
         {
             $label = 'Subjects';
             $doc = 'Subject and Keywords. Typically, a Subject will be expressed as keywords, key phrases or classification codes that describe a topic	of the resource. Recommended best practice is to select a value from a controlled vocabulary or formal classification scheme.';
         }
-        else if ( $labelId == 'bibliographicCitation') 
+        else if ( $labelId == 'bibliographicCitation')
         {
             $label = 'Citation';
             $doc = 'Recommended practice is to include sufficient bibliographic detail to identify the resource as unambiguously as possible, whether or not the citation is in a standard form.';
         }
-        else if ( $labelId == 'rights') 
+        else if ( $labelId == 'rights')
         {
             $label = 'Rights';
             $doc = 'Information about who can access the resource or an indication of its security status.';
         }
-        else if ( $labelId == 'relatedEntities') 
+        else if ( $labelId == 'relatedEntities')
         {
             $label = 'Related entities';
             $doc = 'Entities (companies, organisations, institutions) related to this service with their respective roles, e.g. publisher, data supplier.';
         }
-        else if ( $labelId == 'entityId') 
+        else if ( $labelId == 'entityId')
         {
             $label = 'Entity identifier';
             $doc = 'A global unique identifier for the entity. It allows '.
@@ -283,123 +283,123 @@ class TpMetadataForm extends TpWizardForm
                    'of a standard, just put the name or acronym or create '.
                    'some identifier.';
         }
-        else if ( $labelId == 'entityType') 
+        else if ( $labelId == 'entityType')
         {
             $label = 'Type';
             $doc = 'Entity type (person or organization).';
         }
-        else if ( $labelId == 'acronym') 
+        else if ( $labelId == 'acronym')
         {
             $label = 'Acronym';
             $doc = 'An acronym (code or short word) for the entity.';
         }
-        else if ( $labelId == 'entityName') 
+        else if ( $labelId == 'entityName')
         {
             $label = 'Name';
             $doc = 'Entity name.';
         }
-        else if ( $labelId == 'entityDescription') 
+        else if ( $labelId == 'entityDescription')
         {
             $label = 'Description';
             $doc = 'Entity description.';
         }
-        else if ( $labelId == 'logoURL') 
+        else if ( $labelId == 'logoURL')
         {
             $label = 'Logo (URL)';
             $doc = 'A URL to a small logo of the entity.';
         }
-        else if ( $labelId == 'address') 
+        else if ( $labelId == 'address')
         {
             $label = 'Address';
             $doc = 'Address where the entity is located. It can include street name, street number, district, city, county and other complements. Use the next fields to specify state/province, country and zip code.';
         }
-        else if ( $labelId == 'regionCode') 
+        else if ( $labelId == 'regionCode')
         {
             $label = 'Region';
             $doc = 'Region (e.g., state or province) of the specified address. Use standard abbreviation accepted in the country.';
         }
-        else if ( $labelId == 'countryCode') 
+        else if ( $labelId == 'countryCode')
         {
             $label = 'Country';
             $doc = 'Country of the specified address.';
         }
-        else if ( $labelId == 'zipCode') 
+        else if ( $labelId == 'zipCode')
         {
             $label = 'Zip code';
             $doc = 'Zip or postal code of the specified address.';
         }
-        else if ( $labelId == 'relatedInformation') 
+        else if ( $labelId == 'relatedInformation')
         {
             $label = 'Related information (URL)';
             $doc = 'A URL where more information about this entity can found.';
         }
-        else if ( $labelId == 'longitude') 
+        else if ( $labelId == 'longitude')
         {
             $label = 'Longitude';
             $doc = 'Longitude where the entity is located (in decimal degrees using datum WGS84).';
         }
-        else if ( $labelId == 'latitude') 
+        else if ( $labelId == 'latitude')
         {
             $label = 'Latitude';
             $doc = 'Latitude where the entity is located (in decimal degrees using datum WGS84).';
         }
-        else if ( $labelId == 'fullName') 
+        else if ( $labelId == 'fullName')
         {
             $label = 'Full name';
             $doc = 'Full name.';
         }
-        else if ( $labelId == 'contactTitle') 
+        else if ( $labelId == 'contactTitle')
         {
             $label = 'Job Title';
             $doc = 'Job title (Curator, Director, etc.).';
         }
-        else if ( $labelId == 'telephone') 
+        else if ( $labelId == 'telephone')
         {
             $label = 'Telephone';
             $doc = 'Telephone number.';
         }
-        else if ( $labelId == 'email') 
+        else if ( $labelId == 'email')
         {
             $label = 'E-mail';
             $doc = 'E-mail address.';
         }
-        else if ( $labelId == 'language') 
+        else if ( $labelId == 'language')
         {
             $label = 'Main language of the data provided by this resource';
             $doc = 'Main language of the content in the underlying database.';
         }
-        else if ( $labelId == 'indexingPreferences') 
+        else if ( $labelId == 'indexingPreferences')
         {
             $label = 'Indexing preferences';
             $doc = 'Preferences related to external indexing.';
         }
-        else if ( $labelId == 'startTime') 
+        else if ( $labelId == 'startTime')
         {
             $label = 'Start time';
             $doc = 'Prefered starting time for an external indexing procedure. '.
                    '(note: 12AM means midnight, 12PM means midday)';
         }
-        else if ( $labelId == 'maxDuration') 
+        else if ( $labelId == 'maxDuration')
         {
             $label = 'Max. duration';
             $doc = 'Maximum acceptable duration of an external indexing procedure.';
         }
-        else if ( $labelId == 'frequency') 
+        else if ( $labelId == 'frequency')
         {
             $label = 'Frequency';
             $doc = 'Maximum acceptable frequency for external indexing procedures.';
         }
-        else if ( $labelId == 'entityRoles') 
+        else if ( $labelId == 'entityRoles')
         {
             $label = 'Roles';
             $doc = 'Roles of the entity for this resource.';
         }
-        else if ( $labelId == 'relatedContacts') 
+        else if ( $labelId == 'relatedContacts')
         {
             $label = 'Related contacts';
             $doc = 'Contacts (people) related to the entity.';
         }
-        else if ( $labelId == 'contactRoles') 
+        else if ( $labelId == 'contactRoles')
         {
             $label = 'Roles';
             $doc = 'Roles of the contact for this resource.';
@@ -418,11 +418,11 @@ class TpMetadataForm extends TpWizardForm
 
     } // end of member function GetHtmlLabel
 
-    function GetOptions( $id ) 
+    function GetOptions( $id )
     {
         $options = array();
 
-        if ( $id == 'lang') 
+        if ( $id == 'lang')
         {
             if ( ! defined( 'TP_LANG_OPTIONS' ) )
             {
@@ -439,28 +439,28 @@ class TpMetadataForm extends TpWizardForm
 
             $options = array_merge( array('' => '-- language --'), $options );
         }
-        else if ( $id == 'content_lang') 
+        else if ( $id == 'content_lang')
         {
             $options = $this->GetOptions( 'lang' );
 
             $options['zxx'] = 'No linguistic content';
         }
-        else if ( $id == 'entityRoles') 
+        else if ( $id == 'entityRoles')
         {
             $options = array('data supplier'  => 'Data Supplier',
                              'technical host' => 'Technical Host');
         }
-        else if ( $id == 'entityType') 
+        else if ( $id == 'entityType')
         {
             $options = array('organization' => 'Organization',
                              'person'       => 'Person');
         }
-        else if ( $id == 'contactRoles') 
+        else if ( $id == 'contactRoles')
         {
             $options = array('data administrator'   => 'Data Administrator',
                              'system administrator' => 'System Administrator');
         }
-        else if ( $id == 'hour') 
+        else if ( $id == 'hour')
         {
             $options = array(''   => '--',
                              '1'  => '1',
@@ -476,13 +476,13 @@ class TpMetadataForm extends TpWizardForm
                              '11' => '11',
                              '12' => '12');
         }
-        else if ( $id == 'ampm') 
+        else if ( $id == 'ampm')
         {
             $options = array(''   => '--',
                              'AM' => 'AM',
                              'PM' => 'PM');
         }
-        else if ( $id == 'timezone') 
+        else if ( $id == 'timezone')
         {
             $options = array(''       => '---',
                              'GMT0'   => 'GMT0',
@@ -513,7 +513,7 @@ class TpMetadataForm extends TpWizardForm
                              'GMT-13' => 'GMT-13',
                              'GMT-14' => 'GMT-14');
         }
-        else if ( $id == 'frequency') 
+        else if ( $id == 'frequency')
         {
             $options = array(''    => '----',
                              'P1D' => 'daily',
@@ -523,7 +523,7 @@ class TpMetadataForm extends TpWizardForm
                              'P3M' => 'every 3 months',
                              'P6M' => 'every 6 months');
         }
-        else if ( $id == 'maxDuration') 
+        else if ( $id == 'maxDuration')
         {
             $options = array(''      => '---',
                              'PT1H'  => '1 hour',
@@ -531,7 +531,7 @@ class TpMetadataForm extends TpWizardForm
                              'PT5H'  => '5 hours',
                              'PT10H' => '10 hours');
         }
-        else if ( $id == 'countryCodes') 
+        else if ( $id == 'countryCodes')
         {
             $options = array(''      => '---',
 'AF' => 'AFGHANISTAN',

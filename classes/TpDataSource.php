@@ -158,7 +158,7 @@ class TpDataSource
                                          $this->mConnectionString );
 
             // Then try connecting to database
-			// Tentative de détection d'un DSN
+			// Tentative de dÃ©tection d'un DSN
 			$modeDsn = (strpos($clean_constr, '://') > -1);
 			$argAdodb = $modeDsn ? $clean_constr : $this->mDriverName;
             $this->mConnection = &ADONewConnection( $argAdodb );
@@ -175,8 +175,8 @@ class TpDataSource
             }
 
 			//echo "DEBUG 4 - DSN: $clean_constr / UN: $this->mUserName / PW : $this->mPassword / DB : $this->mDatabaseName<br/>";
-			// Si on utilise un DSN, le PConnect est effectué dans ADONewConnection,
-			// sinon il faut le faire soi-même.
+			// Si on utilise un DSN, le PConnect est effectuÃ© dans ADONewConnection,
+			// sinon il faut le faire soi-mÃªme.
 			if (! $modeDsn) {
 				$ret_val = $this->mConnection->PConnect( $clean_constr,
 														 $this->mUserName, 
