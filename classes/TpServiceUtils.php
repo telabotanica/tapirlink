@@ -224,9 +224,9 @@ class TpServiceUtils
             else
             {
                 // Check if it's really UTF-8
-                // Nous devons faire confiance au format dÃ©finit par le mapping.
-                // En effet, la prÃ©sence des caractÃšres XML spÃ©cial renvoit une erreur "mb_convert_encoding : illegal character"
-                // Il est donc nÃ©cessaire de les Ã©chapper avant. Mais ne connaissant pas l'encodage, cela est impossible
+                // Nous devons faire confiance au format définit par le mapping.
+                // En effet, la présence des caractères XML spécial renvoit une erreur "mb_convert_encoding : illegal character"
+                // Il est donc nécessaire de les échapper avant. Mais ne connaissant pas l'encodage, cela est impossible
                 /*
                 if ( function_exists( 'mb_check_encoding' ) )
                 {

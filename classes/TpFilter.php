@@ -1,32 +1,32 @@
 <?php
 /**
  * $Id: TpFilter.php 1966 2009-01-20 18:11:30Z rdg $
- * 
+ *
  * LICENSE INFORMATION
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details:
- * 
+ *
  * http://www.gnu.org/copyleft/gpl.html
- * 
- * 
+ *
+ *
  * @author Renato De Giovanni <renato [at] cria . org . br>
  *
  * ACKNOWLEDGEMENTS
- * 
- * The URL filter parser (methods _ResolveLiterals, _ResolveConcepts, 
- * _ResolveBrackets, _TokenizeData, _ResolveOperators and 
- * _CreateOperator) has been deliberately translated from the 
- * PyWrapper data provider software (http://www.pywrapper.org/) 
- * with generous permission from its author. Many thanks to Markus 
- * DÃ¶ring!
+ *
+ * The URL filter parser (methods _ResolveLiterals, _ResolveConcepts,
+ * _ResolveBrackets, _TokenizeData, _ResolveOperators and
+ * _CreateOperator) has been deliberately translated from the
+ * PyWrapper data provider software (http://www.pywrapper.org/)
+ * with generous permission from its author. Many thanks to Markus
+ * Döring!
  */
 
 define( 'COP_TYPE', 0 );
@@ -65,16 +65,16 @@ class TpFilter
     var $mIsValid = true;
     var $mOperatorsStack = array();
     var $mEscapeChar;
-    var $mOperators = array( 'isnull'              => 100, 
-                             'like'                => 40, 
-                             'equals'              => 50, 
-                             'greaterthan'         => 60, 
-                             'lessthan'            => 70, 
-                             'greaterthanorequals' => 80, 
-                             'lessthanorequals'    => 90, 
-                             'in'                  => 120, 
-                             'and'                 => 20, 
-                             'or'                  => 10, 
+    var $mOperators = array( 'isnull'              => 100,
+                             'like'                => 40,
+                             'equals'              => 50,
+                             'greaterthan'         => 60,
+                             'lessthan'            => 70,
+                             'greaterthanorequals' => 80,
+                             'lessthanorequals'    => 90,
+                             'in'                  => 120,
+                             'and'                 => 20,
+                             'or'                  => 10,
                              'not'                 => 30 ); // id => precedence
     var $mIsLocal = false;
 
@@ -110,7 +110,7 @@ class TpFilter
 
         $root_boolean_operator = $this->_ResolveOperators( $nested_list );
 
-        if ( is_object( $root_boolean_operator ) and 
+        if ( is_object( $root_boolean_operator ) and
              is_subclass_of( $root_boolean_operator, 'TpBooleanOperator' ) )
         {
             $this->mRootBooleanOperator = $root_boolean_operator;
@@ -120,7 +120,7 @@ class TpFilter
 
     function _ResolveLiterals( $filterString )
     {
-        // reads a string and returns a list of strings and literal 
+        // reads a string and returns a list of strings and literal
         // objects resolving quoted text into literal objects.
         $tokens = array();
         $inside_quote = false;
@@ -136,7 +136,7 @@ class TpFilter
                 if ( $inside_quote )
                 {
                     $inside_quote = false;
-                    array_push( $tokens, 
+                    array_push( $tokens,
                                 new TpExpression( EXP_LITERAL, $literal_content ) );
                 }
                 else
@@ -191,7 +191,7 @@ class TpFilter
 
     function _ResolveConcepts( $list )
     {
-        // Go through a list of strings and literals and replace concepts 
+        // Go through a list of strings and literals and replace concepts
         // found in the string with concept objects.
 
         $new_list = array();
@@ -225,7 +225,7 @@ class TpFilter
                     }
 
                     if ( strlen( $token ) and $token != ',' and
-                         ! in_array( strtolower( $token ), 
+                         ! in_array( strtolower( $token ),
                                      array_keys( $this->mOperators ) ) )
                     {
                         // it should be a concept (no literal, no operator).
@@ -245,7 +245,7 @@ class TpFilter
                     else
                     {
                         // this is no concept. remember string
-                        if ( strlen( $last_string ) > 0 and 
+                        if ( strlen( $last_string ) > 0 and
                              substr( $last_string, -1, 1 ) != '(' )
                         {
                             $last_string .= ' ';
@@ -353,7 +353,7 @@ class TpFilter
                     $tmp = '';
                 }
 
-                if ( is_object( $element ) and 
+                if ( is_object( $element ) and
                      strtolower( get_class( $element ) ) == 'tpnestedlist' )
                 {
                     array_push( $new_list, $this->_TokenizeData( $element ) );
@@ -415,14 +415,14 @@ class TpFilter
 
     function _ResolveOperators( $nestedList )
     {
-        // Takes a list of tokens (operatorString, literalObj, conceptObj, blockObj) 
+        // Takes a list of tokens (operatorString, literalObj, conceptObj, blockObj)
         // and returns a list of tokens with 3 items maximum.
-        // It looks for the operator token with the smallest precedence and creates 
-        // a new Block node for all items before that token and after the smallest 
+        // It looks for the operator token with the smallest precedence and creates
+        // a new Block node for all items before that token and after the smallest
         // token.
 
         // only process lists. return other objects
-        if ( ! ( is_object( $nestedList ) and 
+        if ( ! ( is_object( $nestedList ) and
                  strtolower( get_class( $nestedList ) ) == 'tpnestedlist' ) )
         {
             return $nestedList;
@@ -432,7 +432,7 @@ class TpFilter
         {
             $first_element = $nestedList->GetElement(0);
 
-            if ( is_object( $first_element ) and 
+            if ( is_object( $first_element ) and
                  strtolower( get_class( $first_element ) ) == 'tpnestedlist' )
             {
                 $nestedList = $first_element;
@@ -448,14 +448,14 @@ class TpFilter
 
         foreach( $nestedList->GetElements() as $element )
         {
-            if ( is_object( $element ) and 
+            if ( is_object( $element ) and
                  strtolower( get_class( $element ) == 'tpnestedlist' ) )
             {
                 array_push( $tokens, $this->_ResolveOperators( $element ) );
             }
             else if ( (! is_string( $element ) ) or $element != ',' )
             {
-                // don't append the token "," which has no meaning, 
+                // don't append the token "," which has no meaning,
                 // eg in IN operator arg lists. Be aware that sublists still have commas
                 array_push( $tokens, $element );
             }
@@ -493,7 +493,7 @@ class TpFilter
 
         if ( ! $has_string )
         {
-            // there is no string in this list! 
+            // there is no string in this list!
             // return the original list if there is at least 1 item
             if ( $nestedList->GetSize() > 0 )
             {
@@ -518,7 +518,7 @@ class TpFilter
         {
             ++$seq;
 
-            if ( is_string( $token ) and 
+            if ( is_string( $token ) and
                  $this->mOperators[strtolower($token)] == $min_precedence )
             {
                 $op = strtolower( $token );
@@ -577,7 +577,7 @@ class TpFilter
 
                 $right_boolean_operator = $this->_ResolveOperators( $right_arg );
 
-                if ( $left_boolean_operator != null and 
+                if ( $left_boolean_operator != null and
                      $right_boolean_operator != null )
                 {
                     $op->AddBooleanOperator( $left_boolean_operator );
@@ -599,7 +599,7 @@ class TpFilter
 
             $op = new TpComparisonOperator( COP_ISNULL );
 
-            if ( is_object( $tokens[$idx+1] ) and 
+            if ( is_object( $tokens[$idx+1] ) and
                  strtolower( get_class( $tokens[$idx+1] ) ) == 'tpexpression' )
             {
                 $op->SetExpression( $tokens[$idx+1] );
@@ -663,7 +663,7 @@ class TpFilter
                 return null;
             }
 
-            if ( is_object( $tokens[$idx-1] ) and 
+            if ( is_object( $tokens[$idx-1] ) and
                  strtolower( get_class( $tokens[$idx-1] ) ) == 'tpexpression' and
                  $tokens[$idx-1]->GetType() == EXP_CONCEPT )
             {
@@ -671,8 +671,8 @@ class TpFilter
 
                 $arg = $tokens[$idx+1];
             }
-            else if ( is_object( $tokens[$idx+1] ) and 
-                      strtolower( get_class( $tokens[$idx+1] ) ) == 'tpexpression' and 
+            else if ( is_object( $tokens[$idx+1] ) and
+                      strtolower( get_class( $tokens[$idx+1] ) ) == 'tpexpression' and
                       $tokens[$idx+1]->GetType() == EXP_CONCEPT )
             {
                 $arg = $tokens[$idx-1];
@@ -688,14 +688,14 @@ class TpFilter
             {
                 foreach ( $arg as $el )
                 {
-                    if ( is_object( $el ) and 
+                    if ( is_object( $el ) and
                          strtolower( get_class( $el ) ) == 'tpexpression' )
                     {
                         $op->SetExpression( $el );
                     }
                 }
             }
-            else if ( is_object( $arg ) and 
+            else if ( is_object( $arg ) and
                       strtolower( get_class( $arg ) ) == 'tpexpression' )
             {
                 $op->SetExpression( $arg );
@@ -719,7 +719,7 @@ class TpFilter
             $op = new TpComparisonOperator( COP_IN );
 
             // Set base concept
-            if ( is_object( $tokens[$idx-1] ) and 
+            if ( is_object( $tokens[$idx-1] ) and
                  strtolower( get_class( $tokens[$idx-1] ) ) == 'tpexpression' and
                  $tokens[$idx-1]->GetType() == EXP_CONCEPT )
             {
@@ -731,7 +731,7 @@ class TpFilter
             {
                 $el = $tokens[$i];
 
-                if ( is_object( $el ) and 
+                if ( is_object( $el ) and
                      strtolower( get_class( $el ) ) == 'tpexpression' )
                 {
                     $op->SetExpression( $el );
@@ -804,11 +804,11 @@ class TpFilter
         }
         else if ( strcasecmp( $name, 'concept' ) == 0 )
         {
-            if ( isset( $current_operator ) and 
+            if ( isset( $current_operator ) and
                  $current_operator->GetBooleanType() == COP_TYPE and
                  isset( $attrs['id'] ) )
             {
-                $current_operator->SetExpression( new TpExpression( EXP_CONCEPT, 
+                $current_operator->SetExpression( new TpExpression( EXP_CONCEPT,
                                                                     $attrs['id'] ) );
             }
         }
@@ -816,15 +816,15 @@ class TpFilter
         {
             if ( $this->mIsLocal )
             {
-                if ( isset( $current_operator ) and 
+                if ( isset( $current_operator ) and
                      $current_operator->GetBooleanType() == COP_TYPE and
                      isset( $attrs['table'] ) )
                 {
-                    $concept = new TpTransparentConcept( $attrs['table'], 
+                    $concept = new TpTransparentConcept( $attrs['table'],
                                                          $attrs['field'],
                                                          $attrs['type'] );
 
-                    $current_operator->SetExpression( new TpExpression( EXP_COLUMN, 
+                    $current_operator->SetExpression( new TpExpression( EXP_COLUMN,
                                                                         $concept ) );
                 }
             }
@@ -838,21 +838,21 @@ class TpFilter
         }
         else if ( strcasecmp( $name, 'literal' ) == 0 )
         {
-            if ( isset( $current_operator ) and 
+            if ( isset( $current_operator ) and
                  $current_operator->GetBooleanType() == COP_TYPE and
                  isset( $attrs['value'] ) )
             {
-                $current_operator->SetExpression( new TpExpression( EXP_LITERAL, 
+                $current_operator->SetExpression( new TpExpression( EXP_LITERAL,
                                                                     $attrs['value'] ) );
             }
         }
         else if ( strcasecmp( $name, 'parameter' ) == 0 )
         {
-            if ( isset( $current_operator ) and 
+            if ( isset( $current_operator ) and
                  $current_operator->GetBooleanType() == COP_TYPE and
                  isset( $attrs['name'] ) )
             {
-                $current_operator->SetExpression( new TpExpression( EXP_PARAMETER, 
+                $current_operator->SetExpression( new TpExpression( EXP_PARAMETER,
                                                                     $attrs['name'] ) );
             }
         }
@@ -882,7 +882,7 @@ class TpFilter
 
     } // end of member function StartElement
 
-    function EndElement( $parser, $qualified_name ) 
+    function EndElement( $parser, $qualified_name )
     {
         if ( ! $this->mIsValid )
         {
@@ -893,10 +893,10 @@ class TpFilter
 
         $depth = count( $this->mInTags );
 
-        if ( strcasecmp( $name, 'equals' )              == 0 or 
-             strcasecmp( $name, 'lessThan' )            == 0 or 
+        if ( strcasecmp( $name, 'equals' )              == 0 or
+             strcasecmp( $name, 'lessThan' )            == 0 or
              strcasecmp( $name, 'lessThanOrEquals' )    == 0 or
-             strcasecmp( $name, 'greaterThan' )         == 0 or 
+             strcasecmp( $name, 'greaterThan' )         == 0 or
              strcasecmp( $name, 'greaterThanOrEquals' ) == 0 or
              strcasecmp( $name, 'like' )                == 0 or
              strcasecmp( $name, 'isNull' )              == 0 or
@@ -921,7 +921,7 @@ class TpFilter
 
     } // end of member function EndElement
 
-    function CharacterData( $parser, $data ) 
+    function CharacterData( $parser, $data )
     {
         if ( ! $this->mIsValid )
         {
@@ -938,7 +938,7 @@ class TpFilter
         {
             $this->mRootBooleanOperator =& $operator;
         }
-        else 
+        else
         {
             $current_operator =& $this->mOperatorsStack[$size-1];
 
@@ -1058,9 +1058,9 @@ class TpFilter
 
         // Remove first element
         array_shift( $exploded_path );
-        
+
         return $this->mRootBooleanOperator->AddOperator( $exploded_path, $op );
-        
+
     } // end of member function AddOperator
 
     function &Find( $path )
@@ -1090,9 +1090,9 @@ class TpFilter
 
         // Remove first element
         array_shift( $exploded_path );
-        
+
         return $this->mRootBooleanOperator->Find( $exploded_path );
-        
+
     } // end of member function Find
 
     function GetSql( &$rResource )
@@ -1169,7 +1169,7 @@ class TpFilter
 
                 echo "class ($class): ".$el->GetReference();
             }
-            else 
+            else
             {
                 echo "string: $el";
             }
@@ -1193,7 +1193,7 @@ class TpFilter
 
                 echo "class ($class): ".$el->GetReference();
             }
-            else 
+            else
             {
                 echo "string: $el";
             }
