@@ -1,8 +1,10 @@
-Release 0.7.3 [Tela Botanica] (2014-07-05)
+Release 0.7.3 [Tela Botanica] (2014-07-06)
 --------------------------
-(GIT revision )
+(GIT revision 16)
+	* Encoded all files to UTF-8
+	* Fixed bug with DSN and/or HostName on data source form
 	* Fixed bug with dl() function for php 5.3+
-	* Fixed bug with @ before include function that don't show  the php error messages
+	* Fixed bug with @ before include function that don't show the php error messages
 	* Fixed bug "Constant _DEBUG already defined" in check.php
 	* Added www/localconfig.php à .gitignore
 
