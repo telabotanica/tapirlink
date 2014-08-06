@@ -24,7 +24,7 @@
  * This class has been deliberately translated from the 
  * PyWrapper data provider software (http://www.pywrapper.org/) 
  * with generous permission from its author. Many thanks to Markus 
- * Döring!
+ * DÃ¶ring!
  */
 
 class TpNestedList

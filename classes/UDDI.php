@@ -263,7 +263,7 @@ class UDDI extends PEAR
     var $_version = '0.2.3';
 
     /**
-     * whether to return the UDDI call¥s response headers
+     * whether to return the UDDI call≈Ωs response headers
      * ('headers'), the body ('body'), or both ('all', default)
      * @var string $_returnMode
      */
