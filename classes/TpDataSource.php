@@ -152,30 +152,37 @@ class TpDataSource
                 break;
             }
 
+            // Xpath does not convert special chars back to their original form, so:
+            $clean_constr = str_replace( array('&quot;', '&amp;'), 
+                                         array('"'     , '&'), 
+                                         $this->mConnectionString );
+
             // Then try connecting to database
-            $this->mConnection = &ADONewConnection( $this->mDriverName );
+			// Tentative de détection d'un DSN
+			$modeDsn = (strpos($clean_constr, '://') > -1);
+			$argAdodb = $modeDsn ? $clean_constr : $this->mDriverName;
+            $this->mConnection = &ADONewConnection( $argAdodb );
 
             if ( ! is_object( $this->mConnection ) ) 
             {
                 if ( $raiseErrors )
                 {
-                    $error = "Could not create connection using database type '".
-                             $this->mDriverName."'!";
+                    $error = "Could not create connection using database type '$argAdodb'!";
                     TpDiagnostics::Append( CFG_DATA_VALIDATION_ERROR, $error, DIAG_ERROR );
                 }
                 $ret_val = false;
                 break;
             }
 
-            // Xpath does not convert special chars back to their original form, so:
-            $clean_constr = str_replace( array('&quot;', '&amp;'), 
-                                         array('"'     , '&'), 
-                                         $this->mConnectionString );
-
-            $ret_val = $this->mConnection->PConnect( $clean_constr, 
-                                                     $this->mUserName, 
-                                                     $this->mPassword, 
-                                                     $this->mDatabaseName );
+			//echo "DEBUG 4 - DSN: $clean_constr / UN: $this->mUserName / PW : $this->mPassword / DB : $this->mDatabaseName<br/>";
+			// Si on utilise un DSN, le PConnect est effectué dans ADONewConnection,
+			// sinon il faut le faire soi-même.
+			if (! $modeDsn) {
+				$ret_val = $this->mConnection->PConnect( $clean_constr,
+														 $this->mUserName, 
+														 $this->mPassword, 
+														 $this->mDatabaseName );
+			}
 
             if ( ! $ret_val ) 
             {
