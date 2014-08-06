@@ -1,12 +1,20 @@
+Release 0.7.3 [Tela Botanica] (2014-07-05)
+--------------------------
+(GIT revision )
+	* Fixed bug with dl() function for php 5.3+
+	* Fixed bug with @ before include function that don't show  the php error messages
+	* Fixed bug "Constant _DEBUG already defined" in check.php
+	* Added www/localconfig.php à .gitignore
+
 Release 0.7.2 [Tela Botanica] (2013-03-15)
 --------------------------
 (GIT revision 1)
 
-    * Added a directory "depot" to store xml files (XSD and output models)
+	* Added a directory "depot" to store xml files (XSD and output models)
 	* Added a CNS for Darwin Core terms (2011-10-26) including decisions : Decision-2009-12-07_1 to Decision-2011-10-16_10
-    * Fixed XSD bug : renamed dwc:DateTimeISO to dwc:dateTimeISO
-    * Fixed XSD bug : deleted last slash in XML namespaces URI
-    * Added compatibility with php 5.4 
+	* Fixed XSD bug : renamed dwc:DateTimeISO to dwc:dateTimeISO
+	* Fixed XSD bug : deleted last slash in XML namespaces URI
+	* Added compatibility with php 5.4 
 	* Added .htacces in directories
 	* Added index.html (in french) with Twitter Bootstrap template to link all TapirLink tools
 	* Fixed bug with UTF8 encoding (we need to believe in user)
@@ -16,191 +24,191 @@ Release 0.7.1 (2010-09-14)
 --------------------------
 (revision 2027)
 
-    * Resources can now be configured to reject custom output models.
-    * Concepts are now automatically mapped by default.
-    * New configuration to specify accepted domains for remote file retrieval.
-    * New timezone setting.
-    * Minor adjustments to avoid warnings in PHP versions >= 5.3.
-    * Latest DarwinCore terms added as a possible conceptual schema.
-    * New configuration option to allow more efficient counts in databases.
+	* Resources can now be configured to reject custom output models.
+	* Concepts are now automatically mapped by default.
+	* New configuration to specify accepted domains for remote file retrieval.
+	* New timezone setting.
+	* Minor adjustments to avoid warnings in PHP versions >= 5.3.
+	* Latest DarwinCore terms added as a possible conceptual schema.
+	* New configuration option to allow more efficient counts in databases.
 
 Release 0.7.0 (2009-03-21)
 --------------------------
 (revision 1988)
 
-    * New admin program to check the database encoding configuration.
-    * Check each piece of content that comes from the database 
-      (in search or inventory responses) to avoid wrong charset conversions that
-      may produce invalid XML. Conversion problems could happen when the database
-      charset was incorrectly configured or if the database content somehow
-      didn't follow the expected (real) database encoding.
-    * Added support for mixed content elements, allowing TapirLink to be exchange
-      simple TCS (Taxonomic Concept Schema) data.
-    * Fixed bug in SQL count caching mechanism when it was disabled.
-    * Included basic checks when processing ping request (service configuration, 
-      database connection and runtime errors).
-    * When the targetNamespace of the response structure is the RDF namespace 
-      and the envelope is turned off, TapirLink now returns the HTTP Content-type 
-      application/rdf+xml.
-    * When a search returns no content and the envelope is turned off, TapirLink 
-      now returns HTTP 204 (No Content).
-    * Added support to "IN" operator in KVP filters.
-    * New TP_DIAG_LEVEL option can be used to control diagnostics display.
-    * Fixed bug when importing DiGIR configuration (resource entity was not being
-      imported and all contacts were accumulating in the host entity across
-      different resources).
-    * Replaced XML schema location used in responses with: 
-      http://rs.tdwg.org/tapir/1.0/schema/tdwg_tapir.xsd
-    * Added new metadata fields: entity type, region code, country code and zip code.
-    * Fixed bug when deserializing bibliographic citation.
-    * Added support to the new <rootElement> feature in output model definitions.
+	* New admin program to check the database encoding configuration.
+	* Check each piece of content that comes from the database 
+	  (in search or inventory responses) to avoid wrong charset conversions that
+	  may produce invalid XML. Conversion problems could happen when the database
+	  charset was incorrectly configured or if the database content somehow
+	  didn't follow the expected (real) database encoding.
+	* Added support for mixed content elements, allowing TapirLink to be exchange
+	  simple TCS (Taxonomic Concept Schema) data.
+	* Fixed bug in SQL count caching mechanism when it was disabled.
+	* Included basic checks when processing ping request (service configuration, 
+	  database connection and runtime errors).
+	* When the targetNamespace of the response structure is the RDF namespace 
+	  and the envelope is turned off, TapirLink now returns the HTTP Content-type 
+	  application/rdf+xml.
+	* When a search returns no content and the envelope is turned off, TapirLink 
+	  now returns HTTP 204 (No Content).
+	* Added support to "IN" operator in KVP filters.
+	* New TP_DIAG_LEVEL option can be used to control diagnostics display.
+	* Fixed bug when importing DiGIR configuration (resource entity was not being
+	  imported and all contacts were accumulating in the host entity across
+	  different resources).
+	* Replaced XML schema location used in responses with: 
+	  http://rs.tdwg.org/tapir/1.0/schema/tdwg_tapir.xsd
+	* Added new metadata fields: entity type, region code, country code and zip code.
+	* Fixed bug when deserializing bibliographic citation.
+	* Added support to the new <rootElement> feature in output model definitions.
 
 Release 0.6.1 (2008-08-01)
 --------------------------
 (revision 746)
 
-    * Added support for automatic updates.
-    * Bugfix: dateLastUpdated environment variable was not working if it
-      was mapped to a field with a datatype other than datetime.
-    * Removed unnecessary verification to check if session.save_path is writable
-      when running the configurator.
-    * Included caching mechanism for count SQL in inventories and searches. Can
-      be controlled with TP_SQL_COUNT_CACHE_LIFE_SECS.
+	* Added support for automatic updates.
+	* Bugfix: dateLastUpdated environment variable was not working if it
+	  was mapped to a field with a datatype other than datetime.
+	* Removed unnecessary verification to check if session.save_path is writable
+	  when running the configurator.
+	* Included caching mechanism for count SQL in inventories and searches. Can
+	  be controlled with TP_SQL_COUNT_CACHE_LIFE_SECS.
 
 Release 0.6.0 (2008-04-30)
 --------------------------
 (revision 660)
 
-    * Bugfix: When different configuration interfaces from different 
-      TapirLink installations were being accessed through the same browser,
-      session caching was not making any distinction between them.
-    * Users now need to explicitly choose the conceptual schema format when
-      trying to load an additional conceptual schema in the configuration 
-      interface (mapping form).
-    * When loading concepts from a CNS configuration file (old text format), if the 
-      concept_source alias was not specified then the last concept_source
-      will be loaded.
-    * Bugfix: Resuming the inclusion of new resources was probably not working 
-      correctly in previous versions.
-    * Configuration interface can now make use of debug logging.
-    * Bugfix: KVP filters were not working properly on PHP 4.x when they had
-      nested parenthesis.
-    * Many adjustments in the statistics module.
-    * Fixed bug that was affecting KVP requests when parameter names were in uppercase.
-    * Included missing "charset=utf-8" in the HTTP header.
-    * Flush cache after any change in the local mapping.
-    * Resources are not serialized in session anymore when running the web service.
-    * Bugfix: Empty tagname parameters (inventory operation) were not being ignored.
-    * Bugfix: Output models were failing to produce results when the indexing
-      element had a simple type.
-    * Bugfix: Searches were failing when the parameter "limit" was not specified
-      (default was being set to zero instead of null).
-    * Follow up protocol update: Filter condition will now be ignored when parameter
-      is not passed. When a concept is not locally mapped, the error will now only be
-      raised if there's no missing parameter.
-    * Bugfix: KVP filters were not working if they contained any of the following
-      operators: lessthan, lessthanorequals, greaterthan, greaterthanorequals.
-    * Bugfix: Search XML requests referencing external templates were not working.
-    * Updated local version of ADODB to 4.98.
-    * Changed DiGIR configuration import procedure to overcome an XML parsing problem
-      (or maybe it's a feature?) that sometimes splits a string and calls the character
-      data handler for each individual piece of the string. This was happening when
-      DiGIR metadata content contained diacriticals.
-    * Implemented driver to load concepts in the old DarwinCore format (tied to DiGIR).
-    * Created separate library for Xs classes.
-    * Included new settings TP_LOCAL_REPOSITORY (to indicate where local copies
-      of remote files may be found if manually copied there) and
-      TP_FILE_RETRIEVAL_BEHAVIOUR (prefer_original, prefer_local or only_local).
-    * Implemented driver to load concepts in the new CNS XML format.
-    * Added support to case sensitive dabatabase schemas.
-    * Bugfix: Now each resource has its separate cache directory.
-    * Bugfix: When a node contained a concatenated mapping, it was being rejected.
-      if one of the mappings evaluated to NULL.
-    * Added alias support for output models.
-    * Capabilities response now includes the local datatype for each mapped concept.^M
-    * Removed ConceptNameServers element from capabilities response.^M
-    * Bugfix: log-only requests were not working for search and inventory operations.^M
-    * Bugfix: "next" attribute was not being included in the search summary when^M
-      no records were returned.
-    * Added xsd:dateTime to db timestamp conversion in filters.
-    * Added db timestamp to xsd:dateTime conversion in search and inventory responses.
-    * Bugfix: Fixed value mappings using numeric type zero were not working.
+	* Bugfix: When different configuration interfaces from different 
+	  TapirLink installations were being accessed through the same browser,
+	  session caching was not making any distinction between them.
+	* Users now need to explicitly choose the conceptual schema format when
+	  trying to load an additional conceptual schema in the configuration 
+	  interface (mapping form).
+	* When loading concepts from a CNS configuration file (old text format), if the 
+	  concept_source alias was not specified then the last concept_source
+	  will be loaded.
+	* Bugfix: Resuming the inclusion of new resources was probably not working 
+	  correctly in previous versions.
+	* Configuration interface can now make use of debug logging.
+	* Bugfix: KVP filters were not working properly on PHP 4.x when they had
+	  nested parenthesis.
+	* Many adjustments in the statistics module.
+	* Fixed bug that was affecting KVP requests when parameter names were in uppercase.
+	* Included missing "charset=utf-8" in the HTTP header.
+	* Flush cache after any change in the local mapping.
+	* Resources are not serialized in session anymore when running the web service.
+	* Bugfix: Empty tagname parameters (inventory operation) were not being ignored.
+	* Bugfix: Output models were failing to produce results when the indexing
+	  element had a simple type.
+	* Bugfix: Searches were failing when the parameter "limit" was not specified
+	  (default was being set to zero instead of null).
+	* Follow up protocol update: Filter condition will now be ignored when parameter
+	  is not passed. When a concept is not locally mapped, the error will now only be
+	  raised if there's no missing parameter.
+	* Bugfix: KVP filters were not working if they contained any of the following
+	  operators: lessthan, lessthanorequals, greaterthan, greaterthanorequals.
+	* Bugfix: Search XML requests referencing external templates were not working.
+	* Updated local version of ADODB to 4.98.
+	* Changed DiGIR configuration import procedure to overcome an XML parsing problem
+	  (or maybe it's a feature?) that sometimes splits a string and calls the character
+	  data handler for each individual piece of the string. This was happening when
+	  DiGIR metadata content contained diacriticals.
+	* Implemented driver to load concepts in the old DarwinCore format (tied to DiGIR).
+	* Created separate library for Xs classes.
+	* Included new settings TP_LOCAL_REPOSITORY (to indicate where local copies
+	  of remote files may be found if manually copied there) and
+	  TP_FILE_RETRIEVAL_BEHAVIOUR (prefer_original, prefer_local or only_local).
+	* Implemented driver to load concepts in the new CNS XML format.
+	* Added support to case sensitive dabatabase schemas.
+	* Bugfix: Now each resource has its separate cache directory.
+	* Bugfix: When a node contained a concatenated mapping, it was being rejected.
+	  if one of the mappings evaluated to NULL.
+	* Added alias support for output models.
+	* Capabilities response now includes the local datatype for each mapped concept.^M
+	* Removed ConceptNameServers element from capabilities response.^M
+	* Bugfix: log-only requests were not working for search and inventory operations.^M
+	* Bugfix: "next" attribute was not being included in the search summary when^M
+	  no records were returned.
+	* Added xsd:dateTime to db timestamp conversion in filters.
+	* Added db timestamp to xsd:dateTime conversion in search and inventory responses.
+	* Bugfix: Fixed value mappings using numeric type zero were not working.
 
 Release 0.5 (2007-09-09)
 ------------------------
 (revision 434)
 
-    * Configuration interface can now make use of existing equivalent mappings
-      when clicking on the "automap" button.
-    * Added alias support for query templates.
-    * Caching of query templates, output models and response structures is now
-      activated by default (there were many bugfixes related with caching).
-    * Bugfix: Complex types without content type but with attributes were not 
-      working in response structures.
-    * Bugfix: Attribute references were not working in response structures using
-      PHP 4.x.
-    * Bugfix: Choices in response structures were not working properly when the
-      first option had no content (thanks to Kevin Richards for the fix).
-    * Bugfix: Generic response cache was not working.
+	* Configuration interface can now make use of existing equivalent mappings
+	  when clicking on the "automap" button.
+	* Added alias support for query templates.
+	* Caching of query templates, output models and response structures is now
+	  activated by default (there were many bugfixes related with caching).
+	* Bugfix: Complex types without content type but with attributes were not 
+	  working in response structures.
+	* Bugfix: Attribute references were not working in response structures using
+	  PHP 4.x.
+	* Bugfix: Choices in response structures were not working properly when the
+	  first option had no content (thanks to Kevin Richards for the fix).
+	* Bugfix: Generic response cache was not working.
 
 Release 0.4 (2007-07-24)
 ------------------------
 (revision 413)
 
-    * New schema handler to load concepts from CNS files.
-    * Added initial support to simpleContent and complexContent extension
-      in response structures.
-    * Bugfix: Inventories with multiple concepts were not working before
-      this release.
-    * Bugfix: TAPIR environment variable lastUpdated was renamed to lastUpdate.
-    * Bugfix: Searches with inline output models were not working when response
-      structures involved multiple namespaces.
-    * Bugfix: XML Schema "include" and "import" constructs now work with all 
-      kinds of relative locations (thanks to Roger Hyam).
-    * Removed the limitation that namespaces must be associated with only one 
-      XML Schema.
-    * Bugfix: Searches and inventories with limit = 0 were not working.
-    * Implemented automapping.
-    * Bugfix: Filter comparisons involving concepts that had an underlying fixed
-      value mapping might not work if the value type was numeric.
-    * Concepts can now be locally mapped to TAPIR environment variables.
-    * Bugfix: Element bibliographicCitation in metadata responses was using a
-      wrong namespace.
-    * Bugfix: Elements relatedInformation, hasContact and geo:Point were in 
-      wrong order in metadata responses.
-    * Bugfix: Attribute startTime in the indexingPreferences element (metadata
-      response) was in a wrong format.
+	* New schema handler to load concepts from CNS files.
+	* Added initial support to simpleContent and complexContent extension
+	  in response structures.
+	* Bugfix: Inventories with multiple concepts were not working before
+	  this release.
+	* Bugfix: TAPIR environment variable lastUpdated was renamed to lastUpdate.
+	* Bugfix: Searches with inline output models were not working when response
+	  structures involved multiple namespaces.
+	* Bugfix: XML Schema "include" and "import" constructs now work with all 
+	  kinds of relative locations (thanks to Roger Hyam).
+	* Removed the limitation that namespaces must be associated with only one 
+	  XML Schema.
+	* Bugfix: Searches and inventories with limit = 0 were not working.
+	* Implemented automapping.
+	* Bugfix: Filter comparisons involving concepts that had an underlying fixed
+	  value mapping might not work if the value type was numeric.
+	* Concepts can now be locally mapped to TAPIR environment variables.
+	* Bugfix: Element bibliographicCitation in metadata responses was using a
+	  wrong namespace.
+	* Bugfix: Elements relatedInformation, hasContact and geo:Point were in 
+	  wrong order in metadata responses.
+	* Bugfix: Attribute startTime in the indexingPreferences element (metadata
+	  response) was in a wrong format.
 
 Release 0.3.1 (2007-04-23)
 --------------------------
 
-    * Adapted Darwin schema handler to work with the new Darwin namespace.
+	* Adapted Darwin schema handler to work with the new Darwin namespace.
 
 Release 0.3 (2007-04-12)
 ------------------------
 
-    * Added support to LSID resolution.
-    * Made necessary adjustments to work with an RDF representation of
-      DarwinCore as a response structure.
-    * Bugfix related to the representation of concept ids in the capabilities 
-      response (existing providers will need to regenerate the capabilities 
-      configuration file by saving again the local mapping using the configurator).
+	* Added support to LSID resolution.
+	* Made necessary adjustments to work with an RDF representation of
+	  DarwinCore as a response structure.
+	* Bugfix related to the representation of concept ids in the capabilities 
+	  response (existing providers will need to regenerate the capabilities 
+	  configuration file by saving again the local mapping using the configurator).
 
 Release 0.2 (2007-03-11)
 ------------------------
 
-    * Added support to new attribute "required" inside node mappings.
-    * Added namespace awareness to output model xpaths.
-    * Added support to the new parameter omit-ns.
-    * Added support to XML Schema import and ref.
-    * Added support to all TAPIR environment variables.
-    * Created the idea of having XSLT skins for data navigation. 
-      Two skins available: default and darwin. Added new configuration 
-      option to specify a default skin.
-    * Several bug fixes.
+	* Added support to new attribute "required" inside node mappings.
+	* Added namespace awareness to output model xpaths.
+	* Added support to the new parameter omit-ns.
+	* Added support to XML Schema import and ref.
+	* Added support to all TAPIR environment variables.
+	* Created the idea of having XSLT skins for data navigation. 
+	  Two skins available: default and darwin. Added new configuration 
+	  option to specify a default skin.
+	* Several bug fixes.
 
 Release 0.1 (2007-01-14)
 ------------------------
 
-    * First public release.
+	* First public release.
 
