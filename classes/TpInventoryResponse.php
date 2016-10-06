@@ -122,6 +122,9 @@ class TpInventoryResponse extends TpResponse
         }
 
         $cn = $r_data_source->GetConnection();
+		// @WARNING application UTF8 pour la connexion, sans quoi on a des pbs d'accents
+		// Mathias - 2016-10-06
+		$cn->SetCharSet("UTF8");
 
         $db_encoding = $r_data_source->GetEncoding();
 
